@@ -334,22 +334,22 @@ body {
 
 /* Container do destaque (próximo lançamento) */
 .musica-destaque {
-  max-width: 600px;
-  margin: 3rem auto 4rem;
-  padding: 20px;
-  border: 2px solid #8B5CF6;
-  border-radius: 12px;
   background-color: #111;
-  box-shadow: 0 0 12px #8B5CF6aa;
+  padding: 20px;
+  margin: 20px auto;
+  border-radius: 10px;
+  max-width: 500px;
   text-align: center;
   color: white;
+  border: 1px solid #333;
 }
 
 .musica-destaque img {
   max-width: 100%;
-  border-radius: 12px;
-  margin-bottom: 20px;
-  box-shadow: 0 4px 12px #000;
+  max-height: 180px;
+  object-fit: cover;
+  border-radius: 8px;
+  margin-bottom: 10px;
 }
 
 .musica-destaque h3 {
@@ -554,5 +554,6 @@ a:hover {
 .destaque-box p {
   margin: 5px 0;
 }
+
 
 
