@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <title>Agenda - Brother Who</title>
+  <link rel="stylesheet" href="../CSS/estilo.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=RocknRoll+One&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+</head>
+<body>
+
+  <!-- Cabeçalho -->
+  <header class="cabecalho">
+    <div class="logo">
+      <img src="../CAPAS/Logo B-who (1).png" alt="Logo Brother Who">
+      <a href="../index.html" class="nome-banda" style="text-decoration: none; color: inherit;">
+        <h1>Brother Who</h1>
+        <p>Rock & Metal | São Paulo </p>
+      </a>
+    </div>
+    <nav class="menu">
+      <a href="agenda.html"><i class="ph-calendar"></i> Agenda</a>
+      <a href="musicas.html"><i class="ph-music-note"></i> Músicas</a>
+      <a href="contato.html"><i class="ph-users"></i> Contato</a>
+    </nav>
+    <div class="botao-show">
+      <a href="../pages/contratar.html">
+        <button>Contratar Show</button>
+      </a>
+    </div>
+  </header>
+
+
+  <main>
+    <section class="sobre">
+      <div class="conteudo-texto">
+          <h1>Agenda de Shows</h1>
+      </div>
+  </main>
+
+  <div class="agenda-container">
+
+    <div class="secao">
+      <h3><i class="fa-solid fa-microphone"></i> Próximo Show</h3>
+      <div id="proximo-lista" class="lista-shows"></div>
+    </div>
+
+    <div class="secao">
+      <h3><i class="fa-solid fa-calendar-days"></i> Em Breve</h3>
+      <div id="em-breve-lista" class="lista-shows"></div>
+    </div>
+
+    <div class="secao">
+      <h3><i class="fa-solid fa-square-check"></i> Já Aconteceram</h3>
+      <div id="aconteceu-lista" class="lista-shows"></div>
+    </div>
+  </div>
+
+  <script>
+  fetch("https://opensheet.elk.sh/1SeaT_oYgJwLiR7Q-zQuBcJ75Q5QtZhhMgf37qwIbmrk/Página1")
+    .then(res => res.json())
+    .then(data => {
+      const proximoLista = document.getElementById("proximo-lista");
+      const emBreveLista = document.getElementById("em-breve-lista");
+      const aconteceuLista = document.getElementById("aconteceu-lista");
+
+      data.forEach(show => {
+        const status = show.Status.trim().toLowerCase();
+        const item = document.createElement("div");
+        item.className = "agenda-item";
+
+        const foto = show["Caminho da Foto foto do local"];
+
+        // Cria o conteúdo HTML do bloco
+        let html = `
+          <div class="agenda-conteudo">
+            <div class="foto-local">
+              <img src="${foto}" alt="Foto do local" />
+            </div>
+            <div class="info-local">
+              <h4>${show.Local} - ${show.Cidade}</h4>
+              <p><strong>Data:</strong> ${show.Data} às ${show.Hora}</p>
+              <p>
+                <a href="${show["Link do Local"]}" target="_blank">📍 Local</a>
+                ${status === "já aconteceu" && show["Link de Fotos"] ? ` | <a href="${show["Link de Fotos"]}" target="_blank">📸 Fotos</a>` : ""}
+              </p>
+            </div>
+          </div>
+        `;
+
+        item.innerHTML = html;
+
+        if (status === "próximo") {
+          proximoLista.appendChild(item);
+        } else if (status === "em breve") {
+          emBreveLista.appendChild(item);
+        } else if (status === "já aconteceu") {
+          aconteceuLista.appendChild(item);
+        }
+      });
+    })
+    .catch(err => {
+      console.error("Erro:", err);
+      document.querySelector(".agenda-container").innerHTML = "<p>Erro ao carregar agenda. Tente mais tarde.</p>";
+    });
+  </script>
+
+
+
+  <footer class="rodape">
+    <div class="rodape-conteudo">
+      <p>&copy; 2025 Brother Who. Todos os direitos reservados.</p>
+      <p>São Paulo - SP | Contato: bandabrotherwho@gmail.com</p>
+    </div>
+  </footer>
+
+</body>
+</html>
+

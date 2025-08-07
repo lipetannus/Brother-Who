@@ -1,0 +1,617 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  background-color: #000; /* fundo preto */
+  color: #fff;
+  font-family: 'Roboto',sans-serif
+}
+
+/* Cabeçalho com layout flex */
+.cabecalho {
+  display: flex;
+  align-items: center;
+  padding: 10px 40px;
+  background-color: #000;
+  border-bottom: 1px solid gray;
+}
+
+.nome-banda h1 {
+  font-family: 'RocknRoll One', sans-serif;
+  font-size: 20px;
+  color: #8B5CF6;
+  margin: 0;
+  line-height: 1.2;
+}
+
+.logo {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+/* Logo circular */
+.logo img {
+  height: 60px;
+  width: 60px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 2px solid #8B5CF6;
+}
+
+/* Texto ao lado do logo */
+.nome-banda {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.nome-banda h1 {
+  font-size: 20px;
+  color: #8B5CF6; /* Roxo */
+  margin: 0;
+  line-height: 1.2;
+}
+
+.nome-banda p {
+  font-size: 14px;
+  color: #aaa; /* Cinza claro */
+  margin: 0;
+  line-height: 1.2;
+}
+
+/* Menu centralizado */
+.menu {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    gap: 60px;
+    align-items: center;
+}
+
+.menu a {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    color: #ffffff; 
+    text-decoration: none;
+    font-size: 14px;
+    font-weight: bold;
+    transition: color 0.3s;
+}
+
+.menu a i{
+    font-size: 18px;
+}
+
+.menu a:hover {
+  color: #8B5CF6;
+}
+
+
+.botao-show {
+  flex: 1;
+  display: flex;
+  justify-content: flex-end;
+}
+
+.botao-show button {
+  background-color: #8B5CF6;
+  border: none;
+  padding: 10px 20px;
+  color: white;
+  font-weight: bold;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.botao-show button:hover {
+  background-color: #8B5CF6;
+}
+
+.home {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  height: calc(100vh - 80px);
+  overflow: hidden;
+}
+
+.home h1 {
+  font-family: 'RocknRoll One', sans-serif;
+  font-size: 35px;
+}
+
+.background {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-image: url('../FOTOS/Inicial.JPG');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  mask-image: linear-gradient(to bottom, rgba(0,0,0,1) 60%, rgba(0,0,0,0));
+  -webkit-mask-image: linear-gradient(to bottom, rgba(0,0,0,1) 60%, rgba(0,0,0,0));
+  z-index: 0;
+}
+
+.content {
+  position: absolute;
+  z-index: 1;
+  bottom: 100px;
+  right: 40px;
+  color: white;
+}
+
+
+
+.logo-central {
+  position: absolute;
+  bottom: 120px;
+  right: 60px;
+  width: 150px;
+  height: 150px;
+  border-radius: 50%;
+  border: 3px solid #8B5CF6;
+  box-shadow: 0 0 20px #8B5CF6;
+  z-index: 2;
+}
+
+.sobre {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 60px;
+  padding: 60px 80px;
+  background-color: #000;
+  color: white;
+  flex-wrap: wrap; 
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.conteudo-texto {
+  flex: 0 0 55%;
+  max-width: 55%;
+}
+
+.conteudo-texto h1 {
+  font-family: 'RocknRoll One', sans-serif;
+  font-size: 38px;
+  color: #8B5CF6;
+  margin-bottom: 20px;
+}
+
+
+.conteudo-texto p {
+  font-size: 16px;
+  line-height: 1.7;
+}
+
+.conteudo-fotos {
+  flex: 1;
+  max-width: 45%;
+  position: relative;
+  height: 280px;
+}
+
+
+.conteudo-fotos img {
+  position: absolute;
+  max-height: 180px;
+  border-radius: 8px;
+  transition: transform 0.3s;
+  cursor: pointer;
+}
+
+.conteudo-fotos img:nth-child(1) {
+  top: 0;
+  left: 10%;
+  transform: rotate(-8deg);
+  z-index: 3;
+}
+
+.conteudo-fotos img:nth-child(2) {
+  top: 0;
+  left: 50%;
+  transform: rotate(6deg);
+  z-index: 2;
+}
+
+.conteudo-fotos img:nth-child(3) {
+  top: 130px;
+  left: 30%;
+  transform: rotate(-4deg);
+  z-index: 1;
+}
+
+/* Efeito hover para dar destaque */
+.conteudo-fotos img:hover {
+  transform: rotate(0deg) scale(1.1);
+  z-index: 10;
+  box-shadow: 0 10px 30px rgba(139, 92, 246, 0.9);
+}
+
+
+.botoes-links {
+  display: flex;
+  justify-content: center;   /* Centraliza horizontalmente */
+  gap: 20px;                 /* Espaço entre os botões */
+  padding: 40px 0;           /* Espaço acima e abaixo */
+  flex-wrap: wrap;           /* Se a tela for pequena, eles quebram linha */
+}
+
+.botao {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 12px 24px;
+  border: none;
+  border-radius: 8px;
+  text-decoration: none;
+  color: #fff;
+  font-weight: bold;
+  font-size: 16px;
+  transition: transform 0.2s, opacity 0.2s;
+}
+
+.botao:hover {
+  transform: scale(1.05);
+  opacity: 0.9;
+}
+
+.botao.spotify {
+  background-color: #1DB954; /* Verde Spotify */
+}
+
+.botao.youtube {
+  background-color: #FF0000; /* Vermelho YouTube */
+}
+
+.botao.instagram {
+  background-color: #C13584; /* Roxo Instagram */
+}
+
+.formulario-contrato {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.formulario-contrato input,
+.formulario-contrato textarea {
+  width: 100%;
+  padding: 0.75rem;
+  border-radius: 8px;
+  border: none;
+  font-size: 1rem;
+}
+
+.formulario-contrato label {
+  font-weight: bold;
+  margin-bottom: 0.2rem;
+}
+
+.formulario-contrato button {
+  background-color: #ff0055;
+  color: white;
+  border: none;
+  padding: 1rem;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 1rem;
+  transition: background 0.3s ease;
+}
+
+.formulario-contrato button:hover {
+  background-color: #cc0044;
+}
+
+
+
+.rodape {
+  background-color: #8B5CF6; /* Roxo da identidade visual */
+  color: white;
+  padding: 20px 40px;
+  text-align: center;
+  font-size: 14px;
+}
+
+.rodape-conteudo {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+/* Container do destaque (próximo lançamento) */
+.musica-destaque {
+  background-color: #111;
+  padding: 20px;
+  margin: 20px auto;
+  border-radius: 10px;
+  max-width: 500px;
+  text-align: center;
+  color: white;
+  border: 1px solid #333;
+}
+
+.musica-destaque img {
+  max-width: 100%;
+  max-height: 180px;
+  object-fit: cover;
+  border-radius: 8px;
+  margin-bottom: 10px;
+}
+
+.musica-destaque h3 {
+  font-family: 'RocknRoll One', sans-serif;
+  font-size: 28px;
+  color: #8B5CF6;
+  margin-bottom: 8px;
+}
+
+.musica-destaque p {
+  font-size: 16px;
+  color: #ccc;
+  margin: 6px 0;
+}
+
+/* Lista de músicas lançadas */
+.lista-musicas {
+  max-width: 800px;
+  margin: 0 auto 3rem;
+  padding: 0 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+/* Cada item da lista */
+.musica-item {
+  display: flex;
+  align-items: center;
+  background-color: #111;
+  border: 1px solid #333;
+  border-radius: 8px;
+  padding: 10px 15px;
+  color: white;
+  gap: 20px;
+  transition: background-color 0.3s ease;
+}
+
+.musica-item:hover {
+  background-color: #222;
+}
+
+.musica-item img {
+  width: 60px;
+  height: 60px;
+  object-fit: cover;
+  border-radius: 8px;
+  box-shadow: 0 2px 6px #000;
+}
+
+/* Informação da música */
+.musica-info {
+  flex-grow: 1;
+  font-size: 16px;
+  color: #ddd;
+}
+
+.musica-info strong {
+  font-family: 'RocknRoll One', sans-serif;
+  color: #8B5CF6;
+  font-size: 18px;
+}
+
+.musica-info em {
+  font-style: normal;
+  color: #aaa;
+  font-size: 14px;
+  margin-left: 6px;
+}
+
+.botao-play {
+  background-color: #1DB954;
+  border: none;
+  width: 42px;
+  height: 42px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  text-decoration: none;
+  box-shadow: 0 0 8px #1DB95488;
+}
+
+.botao-play:hover {
+  background-color: #1ed760;
+}
+
+/* Ícone do Spotify dentro do botão */
+.botao-play i {
+  font-size: 20px;
+  color: white;
+}
+
+
+.agenda-container {
+  max-width: 1000px;
+  margin: auto;
+  padding: 20px;
+  color: white;
+}
+
+.secao {
+  margin-top: 40px;
+}
+
+.lista-shows {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.agenda-item {
+  background-color: #111;
+  padding: 15px;
+  border-radius: 8px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 20px;
+  border: 1px solid #333;
+}
+
+.agenda-conteudo {
+  display: flex;
+  gap: 20px;
+}
+
+.foto-local img {
+  width: 120px;
+  height: 120px;
+  object-fit: cover;
+  border-radius: 8px;
+}
+
+.info-local h4 {
+  margin: 0;
+  font-size: 1.2em;
+}
+
+.info-local p {
+  margin: 4px 0;
+}
+
+a {
+  color: #00ff88;
+  text-decoration: none;
+}
+
+a:hover {
+  text-decoration: underline;
+}
+
+.bloco-album {
+  margin-bottom: 40px;
+}
+
+.titulo-album {
+  font-family: 'RocknRoll One', sans-serif;
+  font-size: 20px;
+  color: #8B5CF6;
+  margin-bottom: 15px;
+  border-bottom: 1px solid #444;
+  padding-bottom: 5px;
+}
+
+.destaques-home {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 40px;
+  padding: 40px;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.destaque-box {
+  flex: 1 1 300px;
+  background-color: #111;
+  border: 1px solid #333;
+  padding: 20px;
+  border-radius: 10px;
+  color: white;
+  max-width: 500px;
+  box-shadow: 0 0 15px rgba(139, 92, 246, 0.2);
+}
+
+.destaque-box h3 {
+  color: #8B5CF6;
+  font-size: 20px;
+  margin-bottom: 10px;
+}
+
+.destaque-box img {
+  width: 100%;
+  max-height: 200px;
+  object-fit: cover;
+  border-radius: 6px;
+  margin-bottom: 15px;
+}
+
+.destaque-box p {
+  margin: 5px 0;
+}
+.contato-container {
+  max-width: 800px;
+  margin: 60px auto;
+  padding: 30px;
+  background-color: #111;
+  border-radius: 12px;
+  box-shadow: 0 0 20px rgba(139, 92, 246, 0.2);
+  text-align: center;
+  color: white;
+}
+
+.contato-container h2 {
+  font-size: 28px;
+  margin-bottom: 30px;
+  color: #8B5CF6;
+}
+
+.contato-info {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  font-size: 18px;
+}
+
+.contato-info a {
+  color: #00ff88;
+  text-decoration: none;
+  transition: color 0.3s;
+}
+
+.contato-info a:hover {
+  color: #8B5CF6;
+}
+
+.contato-info i {
+  margin-right: 10px;
+  color: #8B5CF6;
+}
+
+@media (max-width: 600px) {
+  .contato-container {
+    margin: 30px 20px;
+    padding: 20px;
+  }
+
+  .contato-info {
+    font-size: 16px;
+  }
+}
+
+.musica-destaque-home p a {
+  color: #8B5CF6;
+  font-size: 26px;
+  font-weight: bold;
+  text-decoration: none;
+}
+
+.musica-destaque-home p a:hover {
+  text-decoration: underline;
+}
