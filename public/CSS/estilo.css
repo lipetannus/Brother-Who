@@ -106,25 +106,29 @@ body {
   background-color: #8B5CF6;
 }
 
-/* Home com imagem de fundo */
 .home {
   position: relative;
-  height: auto; /* altura automática para mobile */
-  min-height: 60vh; /* opcional, para garantir um mínimo */
-  overflow: visible;
   display: flex;
   justify-content: center;
   align-items: center;
   flex-direction: column;
+  height: calc(100vh - 80px);
+  overflow: hidden;
 }
 
-.background-img {
+.home .background {
   position: absolute;
-  top: 0; left: 0;
+  top: 0;
+  left: 0;
   width: 100%;
-  height: auto;
-  max-height: 100vh; /* limita pra não passar a tela */
-  object-fit: contain; /* mostra a imagem inteira */
+  height: 100%;
+  background-image: url('../FOTOS/Inicial.JPG');
+  background-size: contain; /* mantém a imagem inteira */
+  background-position: top center; /* gruda no topo */
+  background-repeat: no-repeat;
+  background-color: black;
+  mask-image: linear-gradient(to bottom, rgba(0,0,0,1) 60%, rgba(0,0,0,0));
+  -webkit-mask-image: linear-gradient(to bottom, rgba(0,0,0,1) 60%, rgba(0,0,0,0));
   z-index: 0;
 }
 
@@ -702,5 +706,6 @@ a {
 a:hover {
   text-decoration: underline;
 }
+
 
 
