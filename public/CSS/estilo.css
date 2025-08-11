@@ -616,4 +616,48 @@ a:hover {
   text-decoration: underline;
 }
 
+/* Menu hambúrguer escondido no desktop */
+.menu-mobile {
+  display: none;
+  font-size: 2rem;
+  cursor: pointer;
+  color: white;
+}
 
+/* Menu normal no desktop */
+.menu {
+  display: flex;
+  gap: 20px;
+}
+
+/* Ajustes para telas pequenas */
+@media (max-width: 768px) {
+
+  /* Mostra o botão hambúrguer e esconde o menu */
+  .menu-mobile {
+    display: block;
+  }
+
+  .menu {
+    display: none;
+    flex-direction: column;
+    background: black;
+    position: absolute;
+    top: 70px;
+    right: 20px;
+    padding: 10px;
+    border-radius: 5px;
+    z-index: 999;
+  }
+
+  .menu.ativo {
+    display: flex;
+  }
+
+  /* Ajusta imagem de fundo da home */
+  .home .background {
+    background-size: contain !important; /* Mostra a imagem inteira no mobile */
+    background-position: center;
+    background-repeat: no-repeat;
+  }
+}
