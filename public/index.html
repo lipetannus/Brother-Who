@@ -83,6 +83,23 @@
   </footer>
 
   <script>
+    // toggle do menu mobile
+    const menuToggle = document.getElementById('menuToggle');
+    const menu = document.querySelector('.menu');
+
+    if (menuToggle && menu) {
+      menuToggle.addEventListener('click', () => {
+        menu.classList.toggle('ativo'); // mesmo nome que usamos no CSS
+      });
+
+      // fecha o menu ao clicar em um link (melhora UX)
+      menu.querySelectorAll('a').forEach(a => {
+        a.addEventListener('click', () => menu.classList.remove('ativo'));
+      });
+    }
+  </script>
+
+  <script>
     // PRÓXIMO LANÇAMENTO (PÁGINA2)
     fetch("https://opensheet.elk.sh/1SeaT_oYgJwLiR7Q-zQuBcJ75Q5QtZhhMgf37qwIbmrk/Página2")
       .then(res => res.json())
@@ -126,4 +143,5 @@
 </body>
 
 </html>
+
 
