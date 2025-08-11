@@ -1,711 +1,491 @@
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
+/* -----------------------------
+   Reset básico e tokens globais
+------------------------------ */
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+:root{
+  --bg: #000;
+  --fg: #fff;
+  --muted: #aaa;
+  --card: #111;
+  --stroke: #333;
+  --brand: #8B5CF6;   /* roxo */
+  --accent: #00ff88; /* links */
+  --spotify: #1DB954;
+  --youtube: #FF0000;
+  --instagram: #C13584;
+  --radius: 12px;
+  --shadow: 0 0 20px rgba(139,92,246,.2);
 }
 
+html, body { height: 100%; }
 body {
-  background-color: #000; /* fundo preto */
-  color: #fff;
+  background: var(--bg);
+  color: var(--fg);
   font-family: 'Roboto', sans-serif;
+  line-height: 1.5;
 }
 
-/* Cabeçalho com layout flex */
-.cabecalho {
+/* -----------------------------
+   Cabeçalho
+------------------------------ */
+.cabecalho{
+  position: sticky;
+  top: 0;
+  z-index: 50;
   display: flex;
   align-items: center;
-  padding: 10px 40px;
-  background-color: #000;
-  border-bottom: 1px solid gray;
+  gap: 12px;
+  padding: 10px 16px;
+  background: var(--bg);
+  border-bottom: 1px solid #202020;
 }
 
-.logo {
-  flex: 1;
+/* Logo + nome da banda */
+.logo{
+  flex: 1 1 auto;
   display: flex;
   align-items: center;
-  gap: 15px;
+  gap: 12px;
+  min-width: 0;
 }
-
-/* Logo circular */
-.logo img {
-  height: 60px;
-  width: 60px;
+.logo img{
+  width: 56px;
+  height: 56px;
   border-radius: 50%;
   object-fit: cover;
-  border: 2px solid #8B5CF6;
+  border: 2px solid var(--brand);
 }
-
-/* Texto ao lado do logo */
-.nome-banda {
+.nome-banda{
   display: flex;
   flex-direction: column;
-  justify-content: center;
+  text-decoration: none;
+  color: inherit;
 }
-
-.nome-banda h1 {
+.nome-banda h1{
   font-family: 'RocknRoll One', sans-serif;
   font-size: 20px;
-  color: #8B5CF6;
-  margin: 0;
-  line-height: 1.2;
+  color: var(--brand);
+  line-height: 1.1;
+}
+.nome-banda p{
+  font-size: 13px;
+  color: var(--muted);
 }
 
-.nome-banda p {
-  font-size: 14px;
-  color: #aaa; /* Cinza claro */
-  margin: 0;
-  line-height: 1.2;
-}
-
-/* Menu centralizado */
-.menu {
-  flex: 1;
-  display: flex;
-  justify-content: center;
-  gap: 60px;
-  align-items: center;
-}
-
-.menu a {
-  display: flex;
-  align-items: center;
-  gap: 6px;
-  color: #ffffff;
-  text-decoration: none;
-  font-size: 14px;
-  font-weight: bold;
-  transition: color 0.3s;
-}
-
-.menu a i {
-  font-size: 18px;
-}
-
-.menu a:hover {
-  color: #8B5CF6;
-}
-
-.botao-show {
-  flex: 1;
-  display: flex;
-  justify-content: flex-end;
-}
-
-.botao-show button {
-  background-color: #8B5CF6;
-  border: none;
-  padding: 10px 20px;
-  color: white;
-  font-weight: bold;
-  border-radius: 6px;
+/* Botão hamburguer (mobile) */
+.menu-mobile{
+  display: inline-block;
+  font-size: 28px;
+  line-height: 1;
   cursor: pointer;
-  transition: background-color 0.3s;
+  user-select: none;
+  margin-right: 6px;
 }
 
-.botao-show button:hover {
-  background-color: #8B5CF6;
-}
-
-.home {
-  position: relative;
-  display: flex;
-  justify-content: center;
-  align-items: center;
+/* Navegação */
+.menu{
+  display: none; /* mobile: fechado por padrão */
+  position: absolute;
+  top: 64px;
+  right: 12px;
+  background: rgba(0,0,0,.98);
+  padding: 10px 14px;
+  border-radius: 10px;
+  box-shadow: 0 8px 20px rgba(0,0,0,.6);
   flex-direction: column;
-  height: calc(100vh - 80px);
+  gap: 10px;
+}
+.menu a{
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  color: var(--fg);
+  text-decoration: none;
+  font-weight: 700;
+  font-size: 14px;
+  padding: 8px 4px;
+  white-space: nowrap;
+  transition: color .2s ease;
+}
+.menu a:hover{ color: var(--brand); }
+
+/* Classe que o JS adiciona para abrir o menu */
+.menu.ativo{ display: flex; }
+
+/* Botão "Contratar Show" */
+.botao-show{
+  display: none; /* escondido no mobile para dar espaço */
+}
+.botao-show button{
+  background: var(--brand);
+  border: 0;
+  padding: 10px 18px;
+  color: #fff;
+  font-weight: 700;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: transform .15s ease, opacity .15s ease;
+}
+.botao-show button:hover{ transform: translateY(-1px); opacity: .95; }
+
+/* -----------------------------
+   Seção Home (hero)
+------------------------------ */
+.home{
+  position: relative;
+  min-height: 70vh;           /* mobile-first: ocupa boa parte da tela */
+  display: grid;
+  place-items: center;
   overflow: hidden;
+  isolation: isolate;         /* garante camadas corretas */
 }
 
-.home .background {
+/* Background com máscara suave para o rodapé do hero */
+.background{
   position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
+  inset: 0;
   background-image: url('../FOTOS/Inicial.JPG');
-  background-size: contain; /* mantém a imagem inteira */
-  background-position: top center; /* gruda no topo */
   background-repeat: no-repeat;
-  background-color: black;
-  mask-image: linear-gradient(to bottom, rgba(0,0,0,1) 60%, rgba(0,0,0,0));
-  -webkit-mask-image: linear-gradient(to bottom, rgba(0,0,0,1) 60%, rgba(0,0,0,0));
-  z-index: 0;
+  background-size: cover;          /* cobre sem deformar */
+  background-position: top center; /* prioriza topo (cabecalho) */
+}
+.background::after{
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to bottom, rgba(0,0,0,0) 55%, rgba(0,0,0,.9) 100%);
+  pointer-events: none;
 }
 
-.home h1 {
-  font-family: 'RocknRoll One', sans-serif;
-  font-size: 35px;
+/* Conteúdo auxiliar (se for usar textos no futuro) */
+.content{
   position: relative;
   z-index: 1;
+  color: #fff;
 }
 
-.content {
-  position: absolute;
-  z-index: 1;
-  bottom: 100px;
-  right: 40px;
-  color: white;
-}
-
+/* Logo central SEM SUMIR e realmente centralizada */
 .logo-central {
   position: absolute;
-  bottom: 120px;
-  right: 60px;
-  width: 150px;
-  height: 150px;
+  z-index: 2;
+  width: 120px;
+  height: 120px;
   border-radius: 50%;
-  border: 3px solid #8B5CF6;
-  box-shadow: 0 0 20px #8B5CF6;
-  z-index: 2;
+  border: 3px solid var(--brand);
+  box-shadow: 0 0 20px var(--brand);
+  right: 20px;   /* distância da borda direita */
+  bottom: 40px;  /* distância da borda inferior */
+  object-fit: cover;
 }
 
-/* Sobre a banda */
-.sobre {
+
+/* -----------------------------
+   Botões de redes
+------------------------------ */
+.botoes-links{
   display: flex;
-  align-items: flex-start;
-  justify-content: space-between;
-  gap: 60px;
-  padding: 60px 80px;
-  background-color: #000;
-  color: white;
   flex-wrap: wrap;
-  max-width: 1200px;
-  margin: 0 auto;
-}
-
-.conteudo-texto {
-  flex: 0 0 55%;
-  max-width: 55%;
-}
-
-.conteudo-texto h1 {
-  font-family: 'RocknRoll One', sans-serif;
-  font-size: 38px;
-  color: #8B5CF6;
-  margin-bottom: 20px;
-}
-
-.conteudo-texto p {
-  font-size: 16px;
-  line-height: 1.7;
-}
-
-.conteudo-fotos {
-  flex: 1;
-  max-width: 45%;
-  position: relative;
-  height: 280px;
-}
-
-.conteudo-fotos img {
-  position: absolute;
-  max-height: 180px;
-  border-radius: 8px;
-  transition: transform 0.3s;
-  cursor: pointer;
-}
-
-.conteudo-fotos img:nth-child(1) {
-  top: 0;
-  left: 10%;
-  transform: rotate(-8deg);
-  z-index: 3;
-}
-
-.conteudo-fotos img:nth-child(2) {
-  top: 0;
-  left: 50%;
-  transform: rotate(6deg);
-  z-index: 2;
-}
-
-.conteudo-fotos img:nth-child(3) {
-  top: 130px;
-  left: 30%;
-  transform: rotate(-4deg);
-  z-index: 1;
-}
-
-/* Efeito hover para destaque */
-.conteudo-fotos img:hover {
-  transform: rotate(0deg) scale(1.1);
-  z-index: 10;
-  box-shadow: 0 10px 30px rgba(139, 92, 246, 0.9);
-}
-
-/* Botões sociais e links */
-.botoes-links {
-  display: flex;
+  gap: 12px;
   justify-content: center;
-  gap: 20px;
-  padding: 40px 0;
-  flex-wrap: wrap;
+  padding: 24px 16px 36px;
 }
-
-.botao {
+.botao{
   display: inline-flex;
   align-items: center;
   gap: 8px;
-  padding: 12px 24px;
-  border: none;
-  border-radius: 8px;
+  padding: 12px 18px;
+  border-radius: 10px;
   text-decoration: none;
   color: #fff;
-  font-weight: bold;
+  font-weight: 700;
+  font-size: 15px;
+  transition: transform .12s ease, opacity .12s ease;
+}
+.botao:hover{ transform: translateY(-1px); opacity: .9; }
+.botao.spotify{ background: var(--spotify); box-shadow: 0 0 8px #1DB95488; }
+.botao.youtube{ background: var(--youtube); }
+.botao.instagram{ background: var(--instagram); }
+
+/* -----------------------------
+   Seção "Sobre"
+------------------------------ */
+.sobre{
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 20px;
+  padding: 32px 16px 48px;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+.conteudo-texto h1{
+  font-family: 'RocknRoll One', sans-serif;
+  font-size: 28px;
+  color: var(--brand);
+  margin-bottom: 12px;
+}
+.conteudo-texto p{
   font-size: 16px;
-  transition: transform 0.2s, opacity 0.2s;
+  color: #ddd;
 }
 
-.botao:hover {
-  transform: scale(1.05);
-  opacity: 0.9;
+/* Fotos em layout "polaroid" que não distorce nem corta estranhamente */
+.conteudo-fotos{
+  position: relative;
+  min-height: 260px;
 }
-
-.botao.spotify {
-  background-color: #1DB954; /* Verde Spotify */
-}
-
-.botao.youtube {
-  background-color: #FF0000; /* Vermelho YouTube */
-}
-
-.botao.instagram {
-  background-color: #C13584; /* Roxo Instagram */
-}
-
-/* Formulário de contrato */
-.formulario-contrato {
-  display: flex;
-  flex-direction: column;
-  gap: 1rem;
-}
-
-.formulario-contrato input,
-.formulario-contrato textarea {
-  width: 100%;
-  padding: 0.75rem;
-  border-radius: 8px;
-  border: none;
-  font-size: 1rem;
-}
-
-.formulario-contrato label {
-  font-weight: bold;
-  margin-bottom: 0.2rem;
-}
-
-.formulario-contrato button {
-  background-color: #ff0055;
-  color: white;
-  border: none;
-  padding: 1rem;
-  border-radius: 8px;
+.conteudo-fotos img{
+  position: absolute;
+  max-height: 180px;
+  width: auto;
+  border-radius: 10px;
   cursor: pointer;
-  font-size: 1rem;
-  transition: background 0.3s ease;
+  transition: transform .2s ease, box-shadow .2s ease;
+  box-shadow: 0 10px 20px rgba(0,0,0,.5);
+  object-fit: cover;
+}
+/* posições com leve inclinação */
+.conteudo-fotos img:nth-child(1){ top: 0;    left: 8%;  transform: rotate(-6deg); z-index: 3; }
+.conteudo-fotos img:nth-child(2){ top: 0;    left: 52%; transform: rotate(5deg);  z-index: 2; }
+.conteudo-fotos img:nth-child(3){ top: 120px; left: 30%; transform: rotate(-3deg); z-index: 1; }
+
+.conteudo-fotos img:hover{
+  transform: rotate(0) scale(1.06);
+  z-index: 10;
+  box-shadow: 0 10px 30px rgba(139,92,246,.9);
 }
 
-.formulario-contrato button:hover {
-  background-color: #cc0044;
+/* -----------------------------
+   Destaques (próx. lançamento/show)
+------------------------------ */
+.destaques-home{
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 20px;
+  padding: 24px 16px 48px;
+  max-width: 1200px;
+  margin: 0 auto;
 }
-
-/* Rodapé */
-.rodape {
-  background-color: #8B5CF6; /* Roxo da identidade visual */
-  color: white;
-  padding: 20px 40px;
-  text-align: center;
-  font-size: 14px;
+.destaque-box{
+  background: var(--card);
+  border: 1px solid var(--stroke);
+  border-radius: var(--radius);
+  padding: 18px;
+  box-shadow: var(--shadow);
 }
-
-.rodape-conteudo {
-  display: flex;
-  flex-direction: column;
-  gap: 8px;
+.destaque-box h3{
+  color: var(--brand);
+  font-size: 18px;
+  margin-bottom: 8px;
 }
+.destaque-box img{
+  width: 100%;
+  max-height: 220px;
+  object-fit: cover;
+  border-radius: 8px;
+  margin-bottom: 10px;
+}
+.destaque-box p{ color: #ddd; }
 
-/* Música destaque (próximo lançamento) */
-.musica-destaque {
-  background-color: #111;
+/* -----------------------------
+   Agenda / Músicas (classes já existentes)
+------------------------------ */
+.musica-destaque{
+  background: var(--card);
   padding: 20px;
   margin: 20px auto;
   border-radius: 10px;
-  max-width: 500px;
+  max-width: 520px;
   text-align: center;
-  color: white;
-  border: 1px solid #333;
+  color: #fff;
+  border: 1px solid var(--stroke);
 }
-
-.musica-destaque img {
+.musica-destaque img{
   max-width: 100%;
   max-height: 180px;
   object-fit: cover;
   border-radius: 8px;
   margin-bottom: 10px;
 }
-
-.musica-destaque h3 {
+.musica-destaque h3{
   font-family: 'RocknRoll One', sans-serif;
-  font-size: 28px;
-  color: #8B5CF6;
+  font-size: 26px;
+  color: var(--brand);
   margin-bottom: 8px;
 }
+.musica-destaque p{ color: #ccc; }
 
-.musica-destaque p {
-  font-size: 16px;
-  color: #ccc;
-  margin: 6px 0;
+.lista-musicas{
+  max-width: 900px;
+  margin: 0 auto 48px;
+  padding: 0 16px;
+  display: grid;
+  gap: 14px;
 }
-
-/* Lista de músicas lançadas */
-.lista-musicas {
-  max-width: 800px;
-  margin: 0 auto 3rem;
-  padding: 0 20px;
-  display: flex;
-  flex-direction: column;
-  gap: 15px;
-}
-
-/* Cada item da lista */
-.musica-item {
-  display: flex;
+.musica-item{
+  display: grid;
+  grid-template-columns: 64px 1fr auto;
   align-items: center;
-  background-color: #111;
-  border: 1px solid #333;
-  border-radius: 8px;
-  padding: 10px 15px;
-  color: white;
-  gap: 20px;
-  transition: background-color 0.3s ease;
+  gap: 14px;
+  background: var(--card);
+  border: 1px solid var(--stroke);
+  border-radius: 10px;
+  padding: 10px 12px;
 }
-
-.musica-item:hover {
-  background-color: #222;
-}
-
-.musica-item img {
-  width: 60px;
-  height: 60px;
-  object-fit: cover;
-  border-radius: 8px;
+.musica-item img{
+  width: 64px; height: 64px;
+  object-fit: cover; border-radius: 8px;
   box-shadow: 0 2px 6px #000;
 }
-
-/* Informação da música */
-.musica-info {
-  flex-grow: 1;
-  font-size: 16px;
-  color: #ddd;
+.musica-info{
+  color: #ddd; font-size: 16px;
 }
-
-.musica-info strong {
+.musica-info strong{
   font-family: 'RocknRoll One', sans-serif;
-  color: #8B5CF6;
+  color: var(--brand);
   font-size: 18px;
 }
-
-.musica-info em {
-  font-style: normal;
-  color: #aaa;
-  font-size: 14px;
-  margin-left: 6px;
-}
-
-/* Botão play Spotify */
-.botao-play {
-  background-color: #1DB954;
-  border: none;
-  width: 42px;
-  height: 42px;
+.musica-info em{ font-style: normal; color: #aaa; font-size: 14px; margin-left: 6px; }
+.botao-play{
+  background: var(--spotify);
+  border: 0; width: 44px; height: 44px;
   border-radius: 50%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
+  display: grid; place-items: center;
   cursor: pointer;
-  transition: background-color 0.3s ease;
-  text-decoration: none;
   box-shadow: 0 0 8px #1DB95488;
-}
-
-.botao-play:hover {
-  background-color: #1ed760;
-}
-
-.botao-play i {
-  font-size: 20px;
-  color: white;
-}
-
-/* Agenda */
-.agenda-container {
-  max-width: 1000px;
-  margin: auto;
-  padding: 20px;
-  color: white;
-}
-
-.secao {
-  margin-top: 40px;
-}
-
-.lista-shows {
-  display: flex;
-  flex-direction: column;
-  gap: 20px;
-}
-
-.agenda-item {
-  background-color: #111;
-  padding: 15px;
-  border-radius: 8px;
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  gap: 20px;
-  border: 1px solid #333;
-}
-
-.agenda-conteudo {
-  display: flex;
-  gap: 20px;
-}
-
-.foto-local img {
-  width: 120px;
-  height: 120px;
-  object-fit: cover;
-  border-radius: 8px;
-}
-
-.info-local h4 {
-  margin: 0;
-  font-size: 1.2em;
-}
-
-.info-local p {
-  margin: 4px 0;
-}
-
-a {
-  color: #00ff88;
+  transition: transform .12s ease, opacity .12s ease;
   text-decoration: none;
-  transition: color 0.3s;
 }
+.botao-play:hover{ transform: translateY(-1px); opacity: .92; }
+.botao-play i{ color: #fff; font-size: 20px; }
 
-a:hover {
-  text-decoration: underline;
-  color: #8B5CF6;
-}
-
-/* Bloco de álbum */
-.bloco-album {
-  margin-bottom: 40px;
-}
-
-.titulo-album {
-  font-family: 'RocknRoll One', sans-serif;
-  font-size: 20px;
-  color: #8B5CF6;
-  margin-bottom: 15px;
-  border-bottom: 1px solid #444;
-  padding-bottom: 5px;
-}
-
-/* Destaques na home */
-.destaques-home {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  gap: 40px;
-  padding: 40px;
-  max-width: 1200px;
-  margin: 0 auto;
-}
-
-.destaque-box {
-  flex: 1 1 300px;
-  background-color: #111;
-  border: 1px solid #333;
-  padding: 20px;
+.agenda-container{ max-width: 1100px; margin: auto; padding: 20px 16px; color: #fff; }
+.secao{ margin-top: 32px; }
+.lista-shows{ display: grid; gap: 16px; }
+.agenda-item{
+  background: var(--card);
+  border: 1px solid var(--stroke);
   border-radius: 10px;
-  color: white;
-  max-width: 500px;
-  box-shadow: 0 0 15px rgba(139, 92, 246, 0.2);
+  padding: 14px;
+  display: grid;
+  grid-template-columns: 100px 1fr;
+  gap: 14px;
 }
-
-.destaque-box h3 {
-  color: #8B5CF6;
-  font-size: 20px;
-  margin-bottom: 10px;
+.foto-local img{
+  width: 100%; height: 100px; object-fit: cover; border-radius: 8px;
 }
-
-.destaque-box img {
-  width: 100%;
-  max-height: 200px;
-  object-fit: cover;
-  border-radius: 6px;
-  margin-bottom: 15px;
-}
-
-.destaque-box p {
-  margin: 5px 0;
-}
-
-/* Contato */
-.contato-container {
-  max-width: 800px;
-  margin: 60px auto;
-  padding: 30px;
-  background-color: #111;
-  border-radius: 12px;
-  box-shadow: 0 0 20px rgba(139, 92, 246, 0.2);
-  text-align: center;
-  color: white;
-}
-
-.contato-container h2 {
-  font-size: 28px;
-  margin-bottom: 30px;
-  color: #8B5CF6;
-}
-
-.contato-info {
-  display: flex;
-  flex-direction: column;
-  gap: 20px;
-  font-size: 18px;
-}
-
-.contato-info a {
-  color: #00ff88;
-  text-decoration: none;
-  transition: color 0.3s;
-}
-
-.contato-info a:hover {
-  color: #8B5CF6;
-}
-
-.contato-info i {
-  margin-right: 10px;
-  color: #8B5CF6;
-}
-
-/* Menu hambúrguer escondido no desktop */
-.menu-mobile {
-  display: none;
-  font-size: 2rem;
-  cursor: pointer;
-  color: white;
-  user-select: none;
-  z-index: 1001;
-}
-
-/* Menu normal no desktop */
-.menu {
-  display: flex;
-  gap: 20px;
-}
-
-/* Ajustes para telas pequenas */
-@media (max-width: 768px) {
-
-  /* mostra o botão e esconde o menu por padrão */
-  .menu-mobile {
-    display: block;
-    position: absolute;
-    top: 14px;
-    right: 18px;
-  }
-
-  .menu {
-    display: none; /* escondido por padrão */
-    flex-direction: column;
-    background: rgba(0, 0, 0, 0.98);
-    position: absolute;
-    top: 64px;
-    right: 12px;
-    padding: 10px 14px;
-    border-radius: 8px;
-    z-index: 1000;
-    min-width: 160px;
-    gap: 8px;
-    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.6);
-  }
-
-  .menu.ativo {
-    display: flex; /* quando tiver classe .ativo o menu aparece */
-  }
-
-  .menu a {
-    padding: 8px 4px;
-    white-space: nowrap;
-  }
-
-  /* Ajustes do header pra mobile (mantém logo e botão alinhados) */
-  .cabecalho {
-    padding: 8px 14px;
-  }
-
-  /* --- IMAGEM DE FUNDO (home) NO MOBILE --- */
-  .home {
-    height: auto; /* evita cortar a imagem */
-    min-height: 60vh; /* controla a altura inicial */
-  }
-
-  .home .background {
-    background-size: contain; /* mostra a imagem inteira */
-    background-position: center center;
-    background-repeat: no-repeat;
-    background-color: black; /* cor de fundo para preencher as sobras */
-    width: 100%;
-    height: 100vh; /* ocupa toda a altura da tela */
-  }
-
-  /* Ajusta logo-central para mobile */
-  .logo-central {
-    width: 110px;
-    height: 110px;
-    bottom: 30px;
-    right: 20px;
-  }
-
-  /* Ajustes de espaçamento que quebrariam no mobile */
-  .sobre {
-    padding: 30px 20px;
-    gap: 20px;
-  }
-
-  .conteudo-texto {
-    max-width: 100%;
-    flex: 1 1 100%;
-  }
-
-  .conteudo-fotos {
-    order: 2;
-    width: 100%;
-    height: auto;
-    position: relative;
-    margin-top: 20px;
-  }
-
-  .conteudo-fotos img {
-    position: relative;
-    max-height: 180px;
-    width: auto;
-  }
-}
+.info-local h4{ margin: 0 0 4px 0; font-size: 18px; color: #fff; }
+.info-local p{ margin: 4px 0; color: #ccc; }
 
 /* Links gerais */
-a {
-  color: #00ff88;
-  text-decoration: none;
+a{ color: var(--accent); text-decoration: none; }
+a:hover{ text-decoration: underline; }
+
+/* -----------------------------
+   Contato
+------------------------------ */
+.contato-container{
+  max-width: 860px;
+  margin: 48px auto;
+  padding: 24px;
+  background: var(--card);
+  border-radius: 12px;
+  box-shadow: var(--shadow);
+  text-align: center;
+  color: #fff;
+}
+.contato-container h2{
+  font-size: 26px;
+  margin-bottom: 20px;
+  color: var(--brand);
+}
+.contato-info{
+  display: grid;
+  gap: 14px;
+  font-size: 18px;
+}
+.contato-info a{ color: var(--accent); transition: color .2s; }
+.contato-info a:hover{ color: var(--brand); }
+.contato-info i{ margin-right: 8px; color: var(--brand); }
+
+/* -----------------------------
+   Rodapé
+------------------------------ */
+.rodape{
+  background: var(--brand);
+  color: #fff;
+  padding: 18px 16px;
+  text-align: center;
+  font-size: 14px;
+}
+.rodape-conteudo{ display: grid; gap: 6px; }
+
+/* -----------------------------
+   Breakpoints (progressive enhancement)
+------------------------------ */
+
+/* >= 600px: melhora tipografia e espaçamentos */
+@media (min-width: 600px){
+  .logo img{ width: 60px; height: 60px; }
+  .nome-banda h1{ font-size: 22px; }
+  .logo-central{ width: 130px; height: 130px; }
+  .sobre{ gap: 24px; padding: 40px 24px 56px; }
 }
 
-a:hover {
-  text-decoration: underline;
+/* >= 768px: mostra menu completo e botão de ação */
+@media (min-width: 768px){
+  .cabecalho{ padding: 12px 28px; gap: 16px; }
+
+  .menu-mobile{ display: none; }     /* some o hamburguer */
+  .menu{
+    position: static;
+    display: flex !important;
+    flex-direction: row;
+    background: transparent;
+    padding: 0;
+    box-shadow: none;
+    gap: 28px;
+  }
+  .menu a{ padding: 0; }
+
+  .botao-show{ display: flex; justify-content: flex-end; flex: 0 0 auto; }
+
+  .home{ min-height: calc(100vh - 72px); }
+  .logo-central{ width: 150px; height: 150px; }
+
+  .sobre{
+    grid-template-columns: 1.1fr .9fr; /* texto + fotos lado a lado */
+    align-items: start;
+  }
+
+  .destaques-home{
+    grid-template-columns: repeat(2, minmax(280px, 1fr));
+  }
+
+  .agenda-item{
+    grid-template-columns: 120px 1fr;
+  }
+  .foto-local img{ height: 120px; }
 }
+
+/* >= 1024px: ajustes para desktop grande */
+@media (min-width: 1024px){
+  .cabecalho{ padding: 14px 40px; }
+  .nome-banda h1{ font-size: 24px; }
+
+  .home{ min-height: calc(100vh - 80px); }
+  .logo-central{ width: 170px; height: 170px; }
+
+  .sobre{ padding: 60px 40px 80px; gap: 40px; }
+  .conteudo-texto h1{ font-size: 34px; }
+
+  .destaques-home{ padding: 40px; gap: 32px; }
+
+  .lista-musicas{ gap: 16px; }
+  .musica-item{ grid-template-columns: 72px 1fr auto; }
+}
+
+
 
 
 
