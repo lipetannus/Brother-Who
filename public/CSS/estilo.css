@@ -166,23 +166,34 @@ a:hover {
   display: flex
 }
 
+/* Botão "Contratar Show" — agora aparece no mobile também */
 .botao-show {
-  display: none
+  display: flex;
+  justify-content: flex-end;
+  flex: 0 0 auto;
 }
 
 .botao-show button {
   background: var(--brand);
   border: 0;
-  padding: 10px 18px;
+  padding: 8px 12px;
+  /* compacto no mobile */
   color: #fff;
   font-weight: 700;
   border-radius: 8px;
-  cursor: pointer
+  cursor: pointer;
 }
 
 .botao-show button:hover {
   transform: translateY(-1px);
   opacity: .95
+}
+
+@media (max-width:360px) {
+  .botao-show button {
+    padding: 6px 10px;
+    font-size: 14px;
+  }
 }
 
 /* =========================================
@@ -386,22 +397,17 @@ a:hover {
   border-radius: 10px;
   max-width: 520px;
   text-align: center;
-  color: #fff;
   border: 1px solid var(--stroke);
-
-  /* garante altura mínima e centralização */
   display: flex;
   flex-direction: column;
   align-items: center;
+  /* centraliza a capa */
 }
 
 .musica-destaque img {
   max-width: 220px;
-  /* limita largura da capa */
   max-height: 220px;
-  /* limita altura da capa */
   object-fit: cover;
-  /* mantém proporção */
   border-radius: 8px;
   margin-bottom: 10px;
   display: block;
@@ -854,10 +860,15 @@ input:-webkit-autofill {
     padding: 0
   }
 
+  /* botão já visível, só ajusta o tamanho no desktop */
   .botao-show {
     display: flex;
     justify-content: flex-end;
     flex: 0 0 auto
+  }
+
+  .botao-show button {
+    padding: 10px 18px
   }
 
   .home {
