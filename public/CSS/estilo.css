@@ -125,13 +125,12 @@ body {
 }
 
 .home .background {
-  background-size: contain;
-  background-position: top center;
+  background-size: contain; /* mantém a imagem inteira */
+  background-position: top center; /* gruda no topo */
   background-repeat: no-repeat;
   background-color: black;
   width: 100%;
-  min-height: auto; /* deixa a altura se ajustar ao conteúdo */
-  aspect-ratio: 16 / 9; /* mantém proporção */
+  height: 100vh;
 }
 
 .home h1 {
@@ -146,7 +145,7 @@ body {
   width: 100%;
   height: 100%;
   background-image: url('../FOTOS/Inicial.JPG');
-  background-size: contain;
+  background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
   mask-image: linear-gradient(to bottom, rgba(0,0,0,1) 60%, rgba(0,0,0,0));
@@ -689,9 +688,12 @@ a:hover {
   }
 
   .home .background {
-    aspect-ratio: auto; /* libera proporção para mobile */
-    height: auto;
-  }
+  background-size: contain; /* mostra a imagem inteira */
+  background-position: center center;
+  background-repeat: no-repeat;
+  background-color: black; /* cor de fundo para preencher as sobras */
+  width: 100%;
+  height: 100vh; /* ocupa toda a altura da tela */
 }
 
   /* se tiver logo-central perto do rodapé, ajusta posição para mobile */
@@ -712,6 +714,4 @@ a:hover {
   .conteudo-fotos { order: 2; width: 100%; height: auto; position: relative; margin-top: 20px; }
   .conteudo-fotos img { position: relative; max-height: 180px; width: auto; }
 }
-
-
 
