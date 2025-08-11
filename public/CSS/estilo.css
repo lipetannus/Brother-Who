@@ -611,38 +611,49 @@ a:hover {
 
 /* Ajustes para telas pequenas */
 @media (max-width: 768px) {
-
-  /* mostra o botão e esconde o menu por padrão */
-  .menu-mobile {
-    display: block;
-    position: absolute;
-    top: 14px;
-    right: 18px;
-  }
-
   .menu {
-    display: none; /* escondido por padrão */
+    display: none;
     flex-direction: column;
-    background: rgba(0, 0, 0, 0.98);
     position: absolute;
-    top: 64px;
-    right: 12px;
-    padding: 10px 14px;
+    top: 60px; /* altura do header */
+    right: 10px;
+    background: rgba(0,0,0,0.95);
+    padding: 10px 15px;
     border-radius: 8px;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.7);
     z-index: 1000;
     min-width: 160px;
-    gap: 8px;
-    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.6);
+    gap: 12px;
   }
 
   .menu.ativo {
-    display: flex; /* quando tiver classe .ativo o menu aparece */
+    display: flex;
   }
 
   .menu a {
-    padding: 8px 4px;
-    white-space: nowrap;
+    color: #fff;
+    font-weight: bold;
+    font-size: 16px;
+    padding: 8px 0;
   }
+
+  .menu-mobile {
+    display: block;
+    cursor: pointer;
+    font-size: 28px;
+    color: white;
+    user-select: none;
+    position: absolute;
+    top: 15px;
+    right: 20px;
+    z-index: 1100;
+  }
+}
+
+/* Desktop */
+.menu-mobile {
+  display: none; /* Esconde o botão no desktop */
+}
 
   /* Ajustes do header pra mobile (mantém logo e botão alinhados) */
   .cabecalho {
@@ -707,5 +718,6 @@ a {
 a:hover {
   text-decoration: underline;
 }
+
 
 
