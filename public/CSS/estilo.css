@@ -136,51 +136,44 @@ body {
   position: relative;
   overflow: hidden;
   isolation: isolate;
-  /* mobile-first: altura se adapta ao conteúdo da foto */
 }
 
-/* Background com máscara suave para o rodapé do hero */
+/* Background */
 .background{
   position: relative;
 }
-
 .hero-photo{
   width: 100%;
-  height: auto;        /* preserva proporção, nunca corta */
+  height: auto;
   display: block;
 }
-
-
 .background::after{
   content: "";
   position: absolute;
   inset: 0;
-  /* degrade leve no rodapé */
   background: linear-gradient(to bottom, rgba(0,0,0,0) 55%, rgba(0,0,0,.9) 100%);
   pointer-events: none;
 }
 
-/* Conteúdo auxiliar (se for usar textos no futuro) */
+/* Conteúdo auxiliar */
 .content{
   position: relative;
   z-index: 1;
   color: #fff;
 }
 
-/* Logo central SEM SUMIR e realmente centralizada */
-.logo-central{
-  position: absolute;
-  z-index: 2;
-  right: 20px;
-  bottom: 20px;
-  width: 140px;   /* maior de cara no mobile */
-  height: 140px;
+/* Logo central */
+.logo-central {
+  display: block;
+  position: static;
+  margin: 12px auto 0;
+  width: 100px;
+  height: 100px;
   border-radius: 50%;
   border: 3px solid var(--brand);
-  box-shadow: 0 0 20px var(--brand);
+  box-shadow: 0 0 15px var(--brand);
   object-fit: cover;
 }
-
 
 /* -----------------------------
    Botões de redes
@@ -231,7 +224,7 @@ body {
   color: #ddd;
 }
 
-/* Fotos em layout "polaroid" que não distorce nem corta estranhamente */
+/* Fotos sobrepostas */
 .conteudo-fotos{
   position: relative;
   min-height: 260px;
@@ -246,11 +239,9 @@ body {
   box-shadow: 0 10px 20px rgba(0,0,0,.5);
   object-fit: cover;
 }
-/* posições com leve inclinação */
-.conteudo-fotos img:nth-child(1){ top: 0;    left: 8%;  transform: rotate(-6deg); z-index: 3; }
-.conteudo-fotos img:nth-child(2){ top: 0;    left: 52%; transform: rotate(5deg);  z-index: 2; }
+.conteudo-fotos img:nth-child(1){ top: 0; left: 8%; transform: rotate(-6deg); z-index: 3; }
+.conteudo-fotos img:nth-child(2){ top: 0; left: 52%; transform: rotate(5deg); z-index: 2; }
 .conteudo-fotos img:nth-child(3){ top: 120px; left: 30%; transform: rotate(-3deg); z-index: 1; }
-
 .conteudo-fotos img:hover{
   transform: rotate(0) scale(1.06);
   z-index: 10;
@@ -258,7 +249,7 @@ body {
 }
 
 /* -----------------------------
-   Destaques (próx. lançamento/show)
+   Destaques
 ------------------------------ */
 .destaques-home{
   display: grid;
@@ -290,7 +281,7 @@ body {
 .destaque-box p{ color: #ddd; }
 
 /* -----------------------------
-   Agenda / Músicas (classes já existentes)
+   Agenda / Músicas
 ------------------------------ */
 .musica-destaque{
   background: var(--card);
@@ -361,23 +352,54 @@ body {
 .botao-play:hover{ transform: translateY(-1px); opacity: .92; }
 .botao-play i{ color: #fff; font-size: 20px; }
 
-.agenda-container{ max-width: 1100px; margin: auto; padding: 20px 16px; color: #fff; }
+.agenda-container{
+  max-width: 1100px;
+  width: min(1100px, 100%);
+  margin: 0 auto;
+}
 .secao{ margin-top: 32px; }
-.lista-shows{ display: grid; gap: 16px; }
+.lista-shows .agenda-item{ width: 100%; }
+
 .agenda-item{
   background: var(--card);
   border: 1px solid var(--stroke);
   border-radius: 10px;
   padding: 14px;
-  display: grid;
-  grid-template-columns: 100px 1fr;
-  gap: 14px;
 }
-.foto-local img{
-  width: 100%; height: 100px; object-fit: cover; border-radius: 8px;
+
+/* AGENDA - responsivo */
+@media (max-width: 699px){
+  .agenda-conteudo{ display: block; }
+  .foto-local img{ width: 100%; height: auto; }
 }
-.info-local h4{ margin: 0 0 4px 0; font-size: 18px; color: #fff; }
-.info-local p{ margin: 4px 0; color: #ccc; }
+@media (min-width: 700px){
+  .agenda-item{
+    display: flex;
+    align-items: center;
+    gap: 18px;
+  }
+  .agenda-conteudo{
+    display: flex;
+    align-items: center;
+    gap: 18px;
+    flex: 1 1 auto;
+    min-width: 0;
+  }
+  .foto-local{ flex: 0 0 150px; }
+  .foto-local img{
+    width: 150px;
+    height: 150px;
+    object-fit: cover;
+    border-radius: 8px;
+    display: block;
+  }
+  .info-local{
+    flex: 1 1 auto;
+    min-width: 0;
+  }
+  .info-local h4{ margin: 0 0 6px 0; font-size: 1.05rem; }
+  .info-local p{ margin: 4px 0; }
+}
 
 /* Links gerais */
 a{ color: var(--accent); text-decoration: none; }
@@ -423,22 +445,17 @@ a:hover{ text-decoration: underline; }
 .rodape-conteudo{ display: grid; gap: 6px; }
 
 /* -----------------------------
-   Breakpoints (progressive enhancement)
+   Breakpoints
 ------------------------------ */
-
-/* >= 600px: melhora tipografia e espaçamentos */
 @media (min-width: 600px){
   .logo img{ width: 60px; height: 60px; }
   .nome-banda h1{ font-size: 22px; }
   .logo-central{ width: 130px; height: 130px; }
   .sobre{ gap: 24px; padding: 40px 24px 56px; }
 }
-
-/* >= 768px: mostra menu completo e botão de ação */
 @media (min-width: 768px){
   .cabecalho{ padding: 12px 28px; gap: 16px; }
-
-  .menu-mobile{ display: none; }     /* some o hamburguer */
+  .menu-mobile{ display: none; }
   .menu{
     position: static;
     display: flex !important;
@@ -449,74 +466,68 @@ a:hover{ text-decoration: underline; }
     gap: 28px;
   }
   .menu a{ padding: 0; }
-
   .botao-show{ display: flex; justify-content: flex-end; flex: 0 0 auto; }
-  .home{ min-height: calc(100vh - 72px); } 
-  .background{
-    background-size: contain;      /* mostra a imagem inteira */
-    background-position: top center;
-    background-repeat: no-repeat;
-    background-color: #000;        /* bordas pretas nas “sobras” */
-  }
-
-  /* logo no canto inferior direito no mobile */
+  .home{ min-height: calc(100vh - 72px); }
   .logo-central{
-    width: 170px;
-    height: 170px;
+    position: absolute;
     right: 40px;
     bottom: 40px;
+    margin: 0;
+    width: 170px;
+    height: 170px;
   }
-
   .sobre{
-    grid-template-columns: 1.1fr .9fr; /* texto + fotos lado a lado */
+    grid-template-columns: 1.1fr .9fr;
     align-items: start;
   }
-
   .destaques-home{
     grid-template-columns: repeat(2, minmax(280px, 1fr));
   }
-
-  .agenda-item{
-    grid-template-columns: 120px 1fr;
-  }
-  .foto-local img{ height: 120px; }
 }
-
-/* >= 1024px: ajustes para desktop grande */
 @media (min-width: 1024px){
   .cabecalho{
     padding: 14px 40px;
     display: grid;
-    grid-template-columns: auto 1fr auto; /* logo | menu (centro) | botão */
+    grid-template-columns: auto 1fr auto;
     align-items: center;
     column-gap: 24px;
   }
   .nome-banda h1{ font-size: 24px; }
-
   .home{ min-height: calc(100vh - 80px); }
-
   .logo{ justify-self: start; }
-
   .menu{
     position: static;
     display: flex !important;
-    justify-content: center;   /* centraliza os links */
+    justify-content: center;
     gap: 28px;
     background: transparent;
     padding: 0;
     box-shadow: none;
   }
   .botao-show{ justify-self: end; }
-
-
   .sobre{ padding: 60px 40px 80px; gap: 40px; }
   .conteudo-texto h1{ font-size: 34px; }
-
+  .conteudo-fotos{
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 300px;
+  }
+  .conteudo-fotos img:nth-child(1){
+    position: absolute; top: 0; left: 15%; transform: rotate(-6deg);
+  }
+  .conteudo-fotos img:nth-child(2){
+    position: absolute; top: 0; left: 50%; transform: rotate(5deg);
+  }
+  .conteudo-fotos img:nth-child(3){
+    position: absolute; top: 130px; left: 32%; transform: rotate(-3deg);
+  }
   .destaques-home{ padding: 40px; gap: 32px; }
-
   .lista-musicas{ gap: 16px; }
   .musica-item{ grid-template-columns: 72px 1fr auto; }
 }
+
 
 
 
