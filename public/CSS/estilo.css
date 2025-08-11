@@ -136,13 +136,13 @@ a:hover {
   display: none;
   position: absolute;
   top: 64px;
-  right: 12px;
-  background: rgba(0, 0, 0, .98);
+  left: 12px;    
+  background: rgba(0,0,0,.98);
   padding: 10px 14px;
   border-radius: 10px;
-  box-shadow: 0 8px 20px rgba(0, 0, 0, .6);
+  box-shadow: 0 8px 20px rgba(0,0,0,.6);
   flex-direction: column;
-  gap: 10px
+  gap: 10px;
 }
 
 .menu a {
