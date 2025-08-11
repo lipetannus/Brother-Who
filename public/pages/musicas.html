@@ -3,116 +3,279 @@
 <head>
   <meta charset="UTF-8" />
   <title>Músicas - Brother Who</title>
-  <link rel="stylesheet" href="../CSS/estilo.css" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <!-- Fonts e Ícones -->
   <link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet" />
-  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" />
   <link href="https://fonts.googleapis.com/css2?family=RocknRoll+One&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+
+  <!-- CSS -->
+  <link rel="stylesheet" href="../CSS/estilo.css" />
 </head>
 <body>
+  <!-- Cabeçalho -->
   <header class="cabecalho">
+    <div id="menuToggle" class="menu-mobile">☰</div>
+
     <div class="logo">
       <img src="../CAPAS/Logo B-who (1).png" alt="Logo Brother Who" />
-      <a href="../index.html" class="nome-banda" style="text-decoration: none; color: inherit;">
+      <a href="../index.html" class="nome-banda">
         <h1>Brother Who</h1>
         <p>Rock & Metal | São Paulo</p>
       </a>
     </div>
-    <nav class="menu">
-      <a href="agenda.html"><i class="ph-calendar"></i> Agenda</a>
-      <a href="musicas.html"><i class="ph-music-note"></i> Músicas</a>
-      <a href="contato.html"><i class="ph-users"></i> Contato</a>
+
+    <nav class="menu" aria-label="Navegação principal">
+      <a href="agenda.html"><i class="fa-solid fa-calendar-days"></i> Agenda</a>
+      <a href="musicas.html"><i class="fa-solid fa-music"></i> Músicas</a>
+      <a href="contato.html"><i class="fa-solid fa-user-group"></i> Contato</a>
     </nav>
+
     <div class="botao-show">
-      <a href="../pages/contratar.html"><button>Contratar Show</button></a>
+      <a href="../pages/contratar.html"><button type="button">Contratar Show</button></a>
     </div>
   </header>
 
   <main>
-    <section>
-      <h1 style="text-align:center; margin-top: 30px;">Próximo Lançamento</h1>
-      <div id="musica-destaque" class="musica-destaque">
-        <!-- Música destaque vai aparecer aqui -->
+    <!-- Título -->
+    <section class="sobre" aria-labelledby="titulo-musicas">
+      <div class="conteudo-texto">
+        <h1 id="titulo-musicas">Músicas</h1>
+        <p>Ouça os lançamentos e as faixas já disponíveis no Spotify.</p>
       </div>
     </section>
 
-    <section class="lista-musicas">
-      <h2 style="color: white; text-align:center; margin-bottom: 20px;">Lista de Músicas</h2>
+    <!-- Próximo Lançamento (Destaque + Contador) -->
+    <section aria-labelledby="titulo-destaque">
+      <h2 id="titulo-destaque" class="titulo-album" style="text-align:center; margin-bottom: 10px;">Próximo Lançamento</h2>
+      <div id="musica-destaque" class="musica-destaque"><!-- preenchido via JS --></div>
+    </section>
+
+    <!-- Lista de Músicas -->
+    <section class="lista-musicas" aria-labelledby="titulo-lista">
+      <h2 id="titulo-lista" style="color: white; text-align:center; margin-bottom: 20px;">Lista de Músicas</h2>
       <div id="lista-musicas"></div>
     </section>
   </main>
 
+  <!-- Rodapé -->
+  <footer class="rodape">
+    <div class="rodape-conteudo">
+      <p>&copy; 2025 Brother Who. Todos os direitos reservados.</p>
+      <p>São Paulo - SP | Contato: <a href="mailto:bandabrotherwho@gmail.com">bandabrotherwho@gmail.com</a></p>
+    </div>
+  </footer>
+
+  <!-- JS: menu mobile -->
   <script>
-    fetch("https://opensheet.elk.sh/1SeaT_oYgJwLiR7Q-zQuBcJ75Q5QtZhhMgf37qwIbmrk/Página2")
+    (function () {
+      const toggle = document.getElementById('menuToggle');
+      const menu = document.querySelector('.menu');
+      if (!toggle || !menu) return;
+
+      const closeMenu = () => menu.classList.remove('ativo');
+
+      toggle.addEventListener('click', (e) => {
+        e.stopPropagation();
+        menu.classList.toggle('ativo');
+      });
+
+      document.addEventListener('click', (e) => {
+        if (!menu.contains(e.target) && e.target !== toggle) closeMenu();
+      });
+
+      document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape') closeMenu();
+      });
+    })();
+  </script>
+
+  <!-- JS: carregar planilha + destaque com contagem regressiva -->
+  <script>
+    // URL da Página2 (músicas) — mantenha conforme seu Google Sheet/opensheet
+    const SHEET_URL = "https://opensheet.elk.sh/1SeaT_oYgJwLiR7Q-zQuBcJ75Q5QtZhhMgf37qwIbmrk/Página2";
+
+    // Utilitário: normaliza string
+    const norm = (v) => (v || "").toString().trim();
+
+    // Converte "dd/mm/aaaa" (ou "aaaa-mm-dd") + "HH:MM" para Date local
+    function parseBRDateTime(dateStr, timeStr) {
+      const dStr = norm(dateStr);
+      const tStr = norm(timeStr || "00:00");
+
+      let d, m, y, H = 0, Min = 0;
+      const tMatch = tStr.match(/^(\d{1,2}):(\d{2})/);
+      if (tMatch) { H = parseInt(tMatch[1],10); Min = parseInt(tMatch[2],10); }
+
+      if (/^\d{2}\/\d{2}\/\d{4}$/.test(dStr)) {
+        const [dd, mm, yyyy] = dStr.split("/");
+        d = parseInt(dd,10); m = parseInt(mm,10)-1; y = parseInt(yyyy,10);
+        return new Date(y,m,d,H,Min,0,0);
+      }
+      if (/^\d{4}-\d{2}-\d{2}$/.test(dStr)) {
+        const [yyyy, mm, dd] = dStr.split("-");
+        d = parseInt(dd,10); m = parseInt(mm,10)-1; y = parseInt(yyyy,10);
+        return new Date(y,m,d,H,Min,0,0);
+      }
+      const tryParse = new Date(`${dStr} ${tStr}`);
+      return isNaN(tryParse) ? null : tryParse;
+    }
+
+    // Formata diferença em ms para d/h/m/s
+    function formatDiff(ms) {
+      if (ms <= 0) return { d:0, h:0, m:0, s:0 };
+      const total = Math.floor(ms/1000);
+      const d = Math.floor(total / (3600*24));
+      const h = Math.floor((total % (3600*24)) / 3600);
+      const m = Math.floor((total % 3600) / 60);
+      const s = total % 60;
+      return { d, h, m, s };
+    }
+
+    // Render lista de músicas agrupadas por álbum
+    function renderLista(musicas, listaEl) {
+      listaEl.innerHTML = "";
+      const albuns = {};
+      musicas.forEach(m => {
+        const album = norm(m["Album"]) || "Sem Álbum";
+        (albuns[album] ||= []).push(m);
+      });
+
+      Object.keys(albuns).forEach(nomeAlbum => {
+        const bloco = document.createElement("div");
+        bloco.className = "bloco-album";
+
+        const titulo = document.createElement("h3");
+        titulo.className = "titulo-album";
+        titulo.textContent = `Álbum: ${nomeAlbum}`;
+        bloco.appendChild(titulo);
+
+        albuns[nomeAlbum].forEach(m => {
+          const capa = norm(m["Local Foto Capa"]);
+          const nome = norm(m["Nome da Musica"]);
+          const link = norm(m["Link do Spotify"]);
+
+          const item = document.createElement("div");
+          item.className = "musica-item";
+          item.innerHTML = `
+            <img src="${capa}" alt="Capa da música ${nome}" loading="lazy" />
+            <div class="musica-info">
+              <strong>${nome}</strong>
+            </div>
+            ${link ? `
+              <a href="${link}" target="_blank" class="botao-play" aria-label="Ouvir ${nome} no Spotify" rel="noopener">
+                <i class="fab fa-spotify"></i>
+              </a>` : ``}
+          `;
+          bloco.appendChild(item);
+        });
+
+        listaEl.appendChild(bloco);
+      });
+    }
+
+    // Renderiza o destaque (próximo lançamento) com contagem regressiva
+    function renderDestaque(m, container, onExpire) {
+      const capa = norm(m["Local Foto Capa"]);
+      const nome = norm(m["Nome da Musica"]);
+      const album = norm(m["Album"]);
+      const dataLanc = norm(m["Data do Lançamento"]);
+      const horaLanc = norm(m["Hora do Lançamento"]);
+      const alvo = parseBRDateTime(dataLanc, horaLanc);
+      const futuro = alvo && (alvo.getTime() > Date.now());
+
+      container.innerHTML = `
+        <img src="${capa}" alt="Capa da música ${nome}" />
+        <h3>${nome}</h3>
+        ${album ? `<p><em>Álbum: ${album}</em></p>` : ``}
+        ${dataLanc ? `<p><strong>Lançamento:</strong> ${dataLanc}${horaLanc ? " às " + horaLanc : ""}</p>` : ``}
+        ${futuro ? `
+          <div class="countdown" role="timer" aria-live="polite">
+            <div class="countdown-grid">
+              <div class="box"><div class="num" id="cd-d">0</div><div class="label">dias</div></div>
+              <div class="box"><div class="num" id="cd-h">0</div><div class="label">horas</div></div>
+              <div class="box"><div class="num" id="cd-m">0</div><div class="label">min</div></div>
+              <div class="box"><div class="num" id="cd-s">0</div><div class="label">seg</div></div>
+            </div>
+            <div class="countdown-status" id="cd-status" style="margin-top:8px;"></div>
+          </div>
+        ` : `<p class="countdown-live">Disponível agora!</p>`}
+      `;
+
+      if (!futuro) return;
+
+      const elD = container.querySelector("#cd-d");
+      const elH = container.querySelector("#cd-h");
+      const elM = container.querySelector("#cd-m");
+      const elS = container.querySelector("#cd-s");
+      const elStatus = container.querySelector("#cd-status");
+
+      const tick = () => {
+        const diff = alvo.getTime() - Date.now();
+        if (diff <= 0) {
+          clearInterval(timer);
+          elD.textContent = elH.textContent = elM.textContent = elS.textContent = "0";
+          elStatus.textContent = "Lançada!";
+          if (typeof onExpire === "function") onExpire();
+          return;
+        }
+        const { d, h, m, s } = formatDiff(diff);
+        elD.textContent = d;
+        elH.textContent = h.toString().padStart(2, "0");
+        elM.textContent = m.toString().padStart(2, "0");
+        elS.textContent = s.toString().padStart(2, "0");
+        elStatus.textContent = "";
+      };
+
+      tick();
+      const timer = setInterval(tick, 1000);
+    }
+
+    // Fluxo principal
+    fetch(SHEET_URL)
       .then(res => res.json())
       .then(data => {
-        const destaque = document.getElementById("musica-destaque");
-        const lista = document.getElementById("lista-musicas");
+        const destaqueEl = document.getElementById("musica-destaque");
+        const listaEl = document.getElementById("lista-musicas");
 
-        // Encontrar o próximo lançamento
-        const proximoLancamento = data.find(musica => 
-          musica.Status && musica.Status.trim().toLowerCase() === "próximo lançamento"
-        );
+        // separa por status
+        const status = (m) => norm(m["Status"]).toLowerCase();
+        const isLancada = (m) => status(m) === "lançada";
+        const isProx = (m) => status(m) === "próximo lançamento";
 
-        if (proximoLancamento) {
-          destaque.innerHTML = `
-            <img src="${proximoLancamento["Local Foto Capa"]}" alt="Capa da música ${proximoLancamento["Nome da Musica"]}" />
-            <h3>${proximoLancamento["Nome da Musica"]}</h3>
-            <p><em>Álbum: ${proximoLancamento.Album}</em></p>
-            <p><strong>Data de lançamento:</strong> ${proximoLancamento["Data do Lançameto"]}</p>
-          `;
+        let lancadas = data.filter(isLancada);
+        const proximos = data.filter(isProx);
+
+        // Render lista inicial
+        renderLista(lancadas, listaEl);
+
+        // Se houver múltiplos "próximo lançamento", escolha o mais próximo pela data/hora
+        if (proximos.length) {
+          const withDate = proximos
+            .map(m => ({ m, date: parseBRDateTime(m["Data do Lançamento"], m["Hora do Lançamento"]) }))
+            .filter(x => x.date);
+          const proximo = withDate.length
+            ? withDate.sort((a,b) => a.date - b.date)[0].m
+            : proximos[0];
+
+          // Quando lançar, move pra lista e limpa destaque
+          const onExpire = () => {
+            proximo["Status"] = "lançada";
+            lancadas.push(proximo);
+            renderLista(lancadas, listaEl);
+            destaqueEl.innerHTML = `<p class="countdown-live">Disponível agora!</p>`;
+          };
+
+          renderDestaque(proximo, destaqueEl, onExpire);
         } else {
-          destaque.innerHTML = "<p>Nenhum próximo lançamento encontrado.</p>";
+          destaqueEl.innerHTML = "<p>Nenhum próximo lançamento encontrado.</p>";
         }
-
-        // Músicas lançadas agrupadas por álbum
-        const musicasLancadas = data.filter(m => m.Status?.trim().toLowerCase() === "lançada");
-
-        const albuns = {};
-        musicasLancadas.forEach(musica => {
-          const album = musica.Album || "Sem Álbum";
-          if (!albuns[album]) albuns[album] = [];
-          albuns[album].push(musica);
-        });
-
-        Object.keys(albuns).forEach(nomeAlbum => {
-          const blocoAlbum = document.createElement("div");
-          blocoAlbum.className = "bloco-album";
-
-          const tituloAlbum = document.createElement("h3");
-          tituloAlbum.textContent = `Álbum: ${nomeAlbum}`;
-          tituloAlbum.className = "titulo-album";
-          blocoAlbum.appendChild(tituloAlbum);
-
-          albuns[nomeAlbum].forEach(musica => {
-            const item = document.createElement("div");
-            item.className = "musica-item";
-            item.innerHTML = `
-              <img src="${musica["Local Foto Capa"]}" alt="Capa da música ${musica["Nome da Musica"]}" />
-              <div class="musica-info">
-                <strong>${musica["Nome da Musica"]}</strong>
-              </div>
-              <a href="${musica['Link do Spotify']}" target="_blank" class="botao-play" aria-label="Ouvir no Spotify">
-                <i class="fab fa-spotify"></i>
-              </a>
-            `;
-            blocoAlbum.appendChild(item);
-          });
-
-          lista.appendChild(blocoAlbum);
-        });
       })
       .catch(err => {
         console.error("Erro ao carregar músicas:", err);
         document.getElementById("musica-destaque").innerHTML = "<p>Erro ao carregar músicas. Tente mais tarde.</p>";
       });
   </script>
-
-  <footer class="rodape">
-    <div class="rodape-conteudo">
-      <p>&copy; 2025 Brother Who. Todos os direitos reservados.</p>
-      <p>São Paulo - SP | Contato: bandabrotherwho@gmail.com</p>
-    </div>
-  </footer>
 </body>
 </html>
