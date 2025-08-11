@@ -1,35 +1,82 @@
-/* -----------------------------
-   Reset básico e tokens globais
------------------------------- */
-* { margin: 0; padding: 0; box-sizing: border-box; }
+/* =========================================
+   Reset + Tokens
+========================================= */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
 
-:root{
+:root {
   --bg: #000;
   --fg: #fff;
   --muted: #aaa;
   --card: #111;
   --stroke: #333;
-  --brand: #8B5CF6;   /* roxo */
-  --accent: #00ff88; /* links */
+  --brand: #8B5CF6;
+  --accent: #00ff88;
   --spotify: #1DB954;
   --youtube: #FF0000;
   --instagram: #C13584;
   --radius: 12px;
-  --shadow: 0 0 20px rgba(139,92,246,.2);
+  --shadow: 0 0 20px rgba(139, 92, 246, .2);
 }
 
-html, body { height: 100%; }
+html,
+body {
+  height: 100%
+}
+
 body {
   background: var(--bg);
   color: var(--fg);
   font-family: 'Roboto', sans-serif;
-  line-height: 1.5;
+  line-height: 1.5
 }
 
-/* -----------------------------
-   Cabeçalho
------------------------------- */
-.cabecalho{
+img {
+  max-width: 100%;
+  display: block
+}
+
+button,
+input,
+select,
+textarea {
+  font: inherit;
+  color: inherit
+}
+
+a {
+  color: var(--accent);
+  text-decoration: none
+}
+
+a:hover {
+  text-decoration: underline
+}
+
+:focus-visible {
+  outline: 2px solid var(--brand);
+  outline-offset: 2px
+}
+
+@media (prefers-reduced-motion:no-preference) {
+
+  a,
+  button,
+  .botao,
+  .botao-play,
+  .musica-item,
+  .conteudo-fotos img {
+    transition: all .15s ease
+  }
+}
+
+/* =========================================
+   Header / Nav
+========================================= */
+.cabecalho {
   position: sticky;
   top: 0;
   z-index: 50;
@@ -41,62 +88,64 @@ body {
   border-bottom: 1px solid #202020;
 }
 
-/* Logo + nome da banda */
-.logo{
+.logo {
   flex: 1 1 auto;
   display: flex;
   align-items: center;
   gap: 12px;
-  min-width: 0;
+  min-width: 0
 }
-.logo img{
+
+.logo img {
   width: 56px;
   height: 56px;
   border-radius: 50%;
   object-fit: cover;
-  border: 2px solid var(--brand);
+  border: 2px solid var(--brand)
 }
-.nome-banda{
+
+.nome-banda {
   display: flex;
   flex-direction: column;
   text-decoration: none;
-  color: inherit;
+  color: inherit
 }
-.nome-banda h1{
+
+.nome-banda h1 {
   font-family: 'RocknRoll One', sans-serif;
   font-size: 20px;
   color: var(--brand);
-  line-height: 1.1;
-}
-.nome-banda p{
-  font-size: 13px;
-  color: var(--muted);
+  line-height: 1.1
 }
 
-/* Botão hamburguer (mobile) */
-.menu-mobile{
+.nome-banda p {
+  font-size: 13px;
+  color: var(--muted)
+}
+
+.menu-mobile {
   display: inline-block;
   font-size: 28px;
   line-height: 1;
   cursor: pointer;
   user-select: none;
-  margin-right: 6px;
+  margin-right: 6px
 }
 
-/* Navegação */
-.menu{
-  display: none; /* mobile: fechado por padrão */
+.menu {
+  display: none;
   position: absolute;
   top: 64px;
   right: 12px;
-  background: rgba(0,0,0,.98);
+  background: rgba(0, 0, 0, .98);
   padding: 10px 14px;
   border-radius: 10px;
-  box-shadow: 0 8px 20px rgba(0,0,0,.6);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, .6);
   flex-direction: column;
-  gap: 10px;
+  gap: 10px
 }
-.menu a{
+
+.menu a {
   display: flex;
   align-items: center;
   gap: 8px;
@@ -105,64 +154,71 @@ body {
   font-weight: 700;
   font-size: 14px;
   padding: 8px 4px;
-  white-space: nowrap;
-  transition: color .2s ease;
+  white-space: nowrap
 }
-.menu a:hover{ color: var(--brand); }
 
-/* Classe que o JS adiciona para abrir o menu */
-.menu.ativo{ display: flex; }
-
-/* Botão "Contratar Show" */
-.botao-show{
-  display: none; /* escondido no mobile para dar espaço */
+.menu a:hover,
+.menu a.ativo {
+  color: var(--brand)
 }
-.botao-show button{
+
+.menu.ativo {
+  display: flex
+}
+
+.botao-show {
+  display: none
+}
+
+.botao-show button {
   background: var(--brand);
   border: 0;
   padding: 10px 18px;
   color: #fff;
   font-weight: 700;
   border-radius: 8px;
-  cursor: pointer;
-  transition: transform .15s ease, opacity .15s ease;
+  cursor: pointer
 }
-.botao-show button:hover{ transform: translateY(-1px); opacity: .95; }
 
-/* -----------------------------
-   Seção Home (hero)
------------------------------- */
-.home{
+.botao-show button:hover {
+  transform: translateY(-1px);
+  opacity: .95
+}
+
+/* =========================================
+   Home (hero)
+========================================= */
+.home {
   position: relative;
   overflow: hidden;
-  isolation: isolate;
+  isolation: isolate
 }
 
-/* Background */
-.background{
-  position: relative;
+.background {
+  position: relative
 }
-.hero-photo{
+
+.hero-photo {
   width: 100%;
   height: auto;
-  display: block;
+  display: block
 }
-.background::after{
+
+.background::after {
   content: "";
   position: absolute;
   inset: 0;
-  background: linear-gradient(to bottom, rgba(0,0,0,0) 55%, rgba(0,0,0,.9) 100%);
+  background: linear-gradient(to bottom, rgba(0, 0, 0, 0) 55%, rgba(0, 0, 0, .9) 100%);
   pointer-events: none;
 }
 
-/* Conteúdo auxiliar */
-.content{
+.content {
   position: relative;
   z-index: 1;
-  color: #fff;
+  color: #fff
 }
 
-/* Logo central */
+/* logo: mobile abaixo da foto, desktop sobreposta */
 .logo-central {
   display: block;
   position: static;
@@ -175,17 +231,18 @@ body {
   object-fit: cover;
 }
 
-/* -----------------------------
-   Botões de redes
------------------------------- */
-.botoes-links{
+/* =========================================
+   Botões Sociais
+========================================= */
+.botoes-links {
   display: flex;
   flex-wrap: wrap;
   gap: 12px;
   justify-content: center;
-  padding: 24px 16px 36px;
+  padding: 24px 16px 36px
 }
-.botao{
+
+.botao {
   display: inline-flex;
   align-items: center;
   gap: 8px;
@@ -194,18 +251,31 @@ body {
   text-decoration: none;
   color: #fff;
   font-weight: 700;
-  font-size: 15px;
-  transition: transform .12s ease, opacity .12s ease;
+  font-size: 15px
 }
-.botao:hover{ transform: translateY(-1px); opacity: .9; }
-.botao.spotify{ background: var(--spotify); box-shadow: 0 0 8px #1DB95488; }
-.botao.youtube{ background: var(--youtube); }
-.botao.instagram{ background: var(--instagram); }
 
-/* -----------------------------
-   Seção "Sobre"
------------------------------- */
-.sobre{
+.botao:hover {
+  transform: translateY(-1px);
+  opacity: .9
+}
+
+.botao.spotify {
+  background: var(--spotify);
+  box-shadow: 0 0 8px #1DB95488
+}
+
+.botao.youtube {
+  background: var(--youtube)
+}
+
+.botao.instagram {
+  background: var(--instagram)
+}
+
+/* =========================================
+   Sobre
+========================================= */
+.sobre {
   display: grid;
   grid-template-columns: 1fr;
   gap: 20px;
@@ -213,45 +283,65 @@ body {
   max-width: 1200px;
   margin: 0 auto;
 }
-.conteudo-texto h1{
+
+.conteudo-texto h1 {
   font-family: 'RocknRoll One', sans-serif;
   font-size: 28px;
   color: var(--brand);
-  margin-bottom: 12px;
-}
-.conteudo-texto p{
-  font-size: 16px;
-  color: #ddd;
+  margin-bottom: 12px
 }
 
-/* Fotos sobrepostas */
-.conteudo-fotos{
-  position: relative;
-  min-height: 260px;
+.conteudo-texto p {
+  font-size: 16px;
+  color: #ddd
 }
-.conteudo-fotos img{
+
+.conteudo-fotos {
+  position: relative;
+  min-height: 260px
+}
+
+.conteudo-fotos img {
   position: absolute;
   max-height: 180px;
   width: auto;
   border-radius: 10px;
   cursor: pointer;
-  transition: transform .2s ease, box-shadow .2s ease;
-  box-shadow: 0 10px 20px rgba(0,0,0,.5);
+  box-shadow: 0 10px 20px rgba(0, 0, 0, .5);
   object-fit: cover;
 }
-.conteudo-fotos img:nth-child(1){ top: 0; left: 8%; transform: rotate(-6deg); z-index: 3; }
-.conteudo-fotos img:nth-child(2){ top: 0; left: 52%; transform: rotate(5deg); z-index: 2; }
-.conteudo-fotos img:nth-child(3){ top: 120px; left: 30%; transform: rotate(-3deg); z-index: 1; }
-.conteudo-fotos img:hover{
-  transform: rotate(0) scale(1.06);
-  z-index: 10;
-  box-shadow: 0 10px 30px rgba(139,92,246,.9);
+
+.conteudo-fotos img:nth-child(1) {
+  top: 0;
+  left: 8%;
+  transform: rotate(-6deg);
+  z-index: 3
 }
 
-/* -----------------------------
-   Destaques
------------------------------- */
-.destaques-home{
+.conteudo-fotos img:nth-child(2) {
+  top: 0;
+  left: 52%;
+  transform: rotate(5deg);
+  z-index: 2
+}
+
+.conteudo-fotos img:nth-child(3) {
+  top: 120px;
+  left: 30%;
+  transform: rotate(-3deg);
+  z-index: 1
+}
+
+.conteudo-fotos img:hover {
+  transform: rotate(0) scale(1.06);
+  z-index: 10;
+  box-shadow: 0 10px 30px rgba(139, 92, 246, .9)
+}
+
+/* =========================================
+   Destaques (cards na home)
+========================================= */
+.destaques-home {
   display: grid;
   grid-template-columns: 1fr;
   gap: 20px;
@@ -259,31 +349,37 @@ body {
   max-width: 1200px;
   margin: 0 auto;
 }
-.destaque-box{
+
+.destaque-box {
   background: var(--card);
   border: 1px solid var(--stroke);
   border-radius: var(--radius);
   padding: 18px;
-  box-shadow: var(--shadow);
+  box-shadow: var(--shadow)
 }
-.destaque-box h3{
+
+.destaque-box h3 {
   color: var(--brand);
   font-size: 18px;
-  margin-bottom: 8px;
+  margin-bottom: 8px
 }
-.destaque-box img{
+
+.destaque-box img {
   width: 100%;
   max-height: 220px;
   object-fit: cover;
   border-radius: 8px;
-  margin-bottom: 10px;
+  margin-bottom: 10px
 }
-.destaque-box p{ color: #ddd; }
 
-/* -----------------------------
-   Agenda / Músicas
------------------------------- */
-.musica-destaque{
+.destaque-box p {
+  color: #ddd
+}
+
+/* =========================================
+   Músicas (destaque + lista)
+========================================= */
+.musica-destaque {
   background: var(--card);
   padding: 20px;
   margin: 20px auto;
@@ -292,30 +388,59 @@ body {
   text-align: center;
   color: #fff;
   border: 1px solid var(--stroke);
+
+  /* garante altura mínima e centralização */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
-.musica-destaque img{
-  max-width: 100%;
-  max-height: 180px;
+
+.musica-destaque img {
+  max-width: 220px;
+  /* limita largura da capa */
+  max-height: 220px;
+  /* limita altura da capa */
   object-fit: cover;
+  /* mantém proporção */
   border-radius: 8px;
   margin-bottom: 10px;
+  display: block;
 }
-.musica-destaque h3{
+
+.musica-destaque h3 {
   font-family: 'RocknRoll One', sans-serif;
   font-size: 26px;
   color: var(--brand);
-  margin-bottom: 8px;
+  margin-bottom: 8px
 }
-.musica-destaque p{ color: #ccc; }
 
-.lista-musicas{
+.musica-destaque p {
+  color: #ccc
+}
+
+.lista-musicas {
   max-width: 900px;
   margin: 0 auto 48px;
   padding: 0 16px;
   display: grid;
-  gap: 14px;
+  gap: 14px
 }
-.musica-item{
+
+.bloco-album {
+  margin-bottom: 40px
+}
+
+.titulo-album {
+  font-family: 'RocknRoll One', sans-serif;
+  font-size: 20px;
+  color: var(--brand);
+  margin-bottom: 15px;
+  border-bottom: 1px solid #444;
+  padding-bottom: 5px;
+  text-align: left;
+}
+
+.musica-item {
   display: grid;
   grid-template-columns: 64px 1fr auto;
   align-items: center;
@@ -325,90 +450,188 @@ body {
   border-radius: 10px;
   padding: 10px 12px;
 }
-.musica-item img{
-  width: 64px; height: 64px;
-  object-fit: cover; border-radius: 8px;
-  box-shadow: 0 2px 6px #000;
+
+.musica-item img {
+  width: 64px;
+  height: 64px;
+  object-fit: cover;
+  border-radius: 8px;
+  box-shadow: 0 2px 6px #000
 }
-.musica-info{
-  color: #ddd; font-size: 16px;
+
+.musica-info {
+  color: #ddd;
+  font-size: 16px
 }
-.musica-info strong{
+
+.musica-info strong {
   font-family: 'RocknRoll One', sans-serif;
   color: var(--brand);
-  font-size: 18px;
+  font-size: 18px
 }
-.musica-info em{ font-style: normal; color: #aaa; font-size: 14px; margin-left: 6px; }
-.botao-play{
+
+.musica-info em {
+  font-style: normal;
+  color: #aaa;
+  font-size: 14px;
+  margin-left: 6px
+}
+
+.botao-play {
   background: var(--spotify);
-  border: 0; width: 44px; height: 44px;
+  border: 0;
+  width: 44px;
+  height: 44px;
   border-radius: 50%;
-  display: grid; place-items: center;
+  display: grid;
+  place-items: center;
   cursor: pointer;
   box-shadow: 0 0 8px #1DB95488;
-  transition: transform .12s ease, opacity .12s ease;
   text-decoration: none;
 }
-.botao-play:hover{ transform: translateY(-1px); opacity: .92; }
-.botao-play i{ color: #fff; font-size: 20px; }
 
-.agenda-container{
-  max-width: 1100px;
-  width: min(1100px, 100%);
-  margin: 0 auto;
+.botao-play:hover {
+  transform: translateY(-1px);
+  opacity: .92
 }
-.secao{ margin-top: 32px; }
-.lista-shows .agenda-item{ width: 100%; }
 
-.agenda-item{
+.botao-play i {
+  color: #fff;
+  font-size: 20px
+}
+
+/* Contagem regressiva */
+.countdown {
+  margin-top: 12px;
   background: var(--card);
   border: 1px solid var(--stroke);
   border-radius: 10px;
-  padding: 14px;
+  padding: 12px
 }
 
-/* AGENDA - responsivo */
-@media (max-width: 699px){
-  .agenda-conteudo{ display: block; }
-  .foto-local img{ width: 100%; height: auto; }
+.countdown-grid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(60px, 1fr));
+  gap: 10px;
+  align-items: stretch
 }
-@media (min-width: 700px){
-  .agenda-item{
+
+.countdown .box {
+  background: #0b0b0b;
+  border: 1px solid #222;
+  border-radius: 10px;
+  text-align: center;
+  padding: 10px 8px
+}
+
+.countdown .num {
+  font-family: 'RocknRoll One', sans-serif;
+  font-size: 28px;
+  color: var(--brand);
+  line-height: 1
+}
+
+.countdown .label {
+  font-size: 12px;
+  color: #bbb;
+  margin-top: 6px;
+  text-transform: uppercase;
+  letter-spacing: .5px
+}
+
+.countdown-live {
+  margin-top: 10px;
+  font-weight: 700;
+  color: var(--accent)
+}
+
+@media (max-width:480px) {
+  .countdown-grid {
+    grid-template-columns: repeat(2, minmax(80px, 1fr))
+  }
+}
+
+/* =========================================
+   Agenda
+========================================= */
+.agenda-container {
+  max-width: 1100px;
+  width: min(1100px, 100%);
+  margin: 0 auto
+}
+
+.secao {
+  margin-top: 32px
+}
+
+.lista-shows .agenda-item {
+  width: 100%
+}
+
+.agenda-item {
+  background: var(--card);
+  border: 1px solid var(--stroke);
+  border-radius: 10px;
+  padding: 14px
+}
+
+@media (max-width:699px) {
+  .agenda-conteudo {
+    display: block
+  }
+
+  .foto-local img {
+    width: 100%;
+    height: auto
+  }
+}
+
+@media (min-width:700px) {
+  .agenda-item {
     display: flex;
     align-items: center;
-    gap: 18px;
+    gap: 18px
   }
-  .agenda-conteudo{
+
+  .agenda-conteudo {
     display: flex;
     align-items: center;
     gap: 18px;
     flex: 1 1 auto;
-    min-width: 0;
+    min-width: 0
   }
-  .foto-local{ flex: 0 0 150px; }
-  .foto-local img{
+
+  .foto-local {
+    flex: 0 0 150px
+  }
+
+  .foto-local img {
     width: 150px;
     height: 150px;
     object-fit: cover;
     border-radius: 8px;
-    display: block;
+    display: block
   }
-  .info-local{
+
+  .info-local {
     flex: 1 1 auto;
-    min-width: 0;
+    min-width: 0
   }
-  .info-local h4{ margin: 0 0 6px 0; font-size: 1.05rem; }
-  .info-local p{ margin: 4px 0; }
+
+  .info-local h4 {
+    margin: 0 0 6px 0;
+    font-size: 1.05rem
+  }
+
+  .info-local p {
+    margin: 4px 0
+  }
 }
 
-/* Links gerais */
-a{ color: var(--accent); text-decoration: none; }
-a:hover{ text-decoration: underline; }
-
-/* -----------------------------
+/* =========================================
    Contato
------------------------------- */
-.contato-container{
+========================================= */
+.contato-container {
   max-width: 860px;
   margin: 48px auto;
   padding: 24px;
@@ -416,121 +639,336 @@ a:hover{ text-decoration: underline; }
   border-radius: 12px;
   box-shadow: var(--shadow);
   text-align: center;
-  color: #fff;
+  color: #fff
 }
-.contato-container h2{
+
+.contato-container h2 {
   font-size: 26px;
   margin-bottom: 20px;
-  color: var(--brand);
+  color: var(--brand)
 }
-.contato-info{
+
+.contato-info {
   display: grid;
   gap: 14px;
-  font-size: 18px;
+  font-size: 18px
 }
-.contato-info a{ color: var(--accent); transition: color .2s; }
-.contato-info a:hover{ color: var(--brand); }
-.contato-info i{ margin-right: 8px; color: var(--brand); }
 
-/* -----------------------------
+.contato-info a {
+  color: var(--accent)
+}
+
+.contato-info a:hover {
+  color: var(--brand)
+}
+
+.contato-info i {
+  margin-right: 8px;
+  color: var(--brand)
+}
+
+/* =========================================
+   Contratar (Formulário)
+========================================= */
+.formulario-contratar {
+  display: grid;
+  gap: 16px;
+  text-align: left
+}
+
+.formulario-contratar label {
+  display: flex;
+  flex-direction: column;
+  gap: 6px
+}
+
+.formulario-contratar label span {
+  font-weight: 700;
+  color: #ddd;
+  font-size: .95rem
+}
+
+.formulario-contratar input,
+.formulario-contratar select,
+.formulario-contratar textarea {
+  width: 100%;
+  padding: 12px 14px;
+  border-radius: 10px;
+  border: 1px solid #2a2a2a;
+  background: #0b0b0b;
+  color: #fff;
+}
+
+.formulario-contratar textarea {
+  resize: vertical
+}
+
+.formulario-contratar input::placeholder,
+.formulario-contratar textarea::placeholder {
+  color: #777
+}
+
+.grid-2 {
+  display: grid;
+  gap: 16px
+}
+
+.grid-3 {
+  display: grid;
+  gap: 16px
+}
+
+.termos {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px
+}
+
+.termos input {
+  transform: translateY(2px)
+}
+
+.acoes {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-top: 6px
+}
+
+.btn-primary,
+.btn-sec {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 12px 18px;
+  border-radius: 10px;
+  text-decoration: none;
+  font-weight: 700;
+  border: 1px solid transparent;
+  cursor: pointer
+}
+
+.btn-primary {
+  background: var(--brand);
+  color: #fff
+}
+
+.btn-primary:hover {
+  transform: translateY(-1px);
+  opacity: .95
+}
+
+.btn-sec {
+  background: #0b0b0b;
+  border-color: #2a2a2a
+}
+
+.btn-sec:hover {
+  border-color: #444
+}
+
+input:invalid,
+select:invalid,
+textarea:invalid {
+  border-color: #3a3a3a
+}
+
+input:focus,
+select:focus,
+textarea:focus {
+  border-color: var(--brand);
+  box-shadow: 0 0 0 3px rgba(139, 92, 246, .2)
+}
+
+/* autofill */
+input:-webkit-autofill {
+  -webkit-box-shadow: 0 0 0px 1000px #0b0b0b inset;
+  -webkit-text-fill-color: #fff
+}
+
+/* =========================================
    Rodapé
------------------------------- */
-.rodape{
+========================================= */
+.rodape {
   background: var(--brand);
   color: #fff;
   padding: 18px 16px;
   text-align: center;
-  font-size: 14px;
+  font-size: 14px
 }
-.rodape-conteudo{ display: grid; gap: 6px; }
 
-/* -----------------------------
-   Breakpoints
------------------------------- */
-@media (min-width: 600px){
-  .logo img{ width: 60px; height: 60px; }
-  .nome-banda h1{ font-size: 22px; }
-  .logo-central{ width: 130px; height: 130px; }
-  .sobre{ gap: 24px; padding: 40px 24px 56px; }
+.rodape-conteudo {
+  display: grid;
+  gap: 6px
 }
-@media (min-width: 768px){
-  .cabecalho{ padding: 12px 28px; gap: 16px; }
-  .menu-mobile{ display: none; }
-  .menu{
+
+/* =========================================
+   Breakpoints
+========================================= */
+@media (min-width:600px) {
+  .logo img {
+    width: 60px;
+    height: 60px
+  }
+
+  .nome-banda h1 {
+    font-size: 22px
+  }
+
+  .logo-central {
+    width: 130px;
+    height: 130px
+  }
+
+  .sobre {
+    gap: 24px;
+    padding: 40px 24px 56px
+  }
+
+  .grid-2 {
+    grid-template-columns: repeat(2, 1fr)
+  }
+}
+
+@media (min-width:768px) {
+  .cabecalho {
+    padding: 12px 28px;
+    gap: 16px
+  }
+
+  .menu-mobile {
+    display: none
+  }
+
+  .menu {
     position: static;
     display: flex !important;
     flex-direction: row;
     background: transparent;
     padding: 0;
     box-shadow: none;
-    gap: 28px;
+    gap: 28px
   }
-  .menu a{ padding: 0; }
-  .botao-show{ display: flex; justify-content: flex-end; flex: 0 0 auto; }
-  .home{ min-height: calc(100vh - 72px); }
-  .logo-central{
+
+  .menu a {
+    padding: 0
+  }
+
+  .botao-show {
+    display: flex;
+    justify-content: flex-end;
+    flex: 0 0 auto
+  }
+
+  .home {
+    min-height: calc(100vh - 72px)
+  }
+
+  .logo-central {
     position: absolute;
     right: 40px;
     bottom: 40px;
     margin: 0;
     width: 170px;
-    height: 170px;
+    height: 170px
   }
-  .sobre{
+
+  .sobre {
     grid-template-columns: 1.1fr .9fr;
-    align-items: start;
+    align-items: start
   }
-  .destaques-home{
-    grid-template-columns: repeat(2, minmax(280px, 1fr));
+
+  .destaques-home {
+    grid-template-columns: repeat(2, minmax(280px, 1fr))
+  }
+
+  .grid-3 {
+    grid-template-columns: 2fr 1fr 1fr
   }
 }
-@media (min-width: 1024px){
-  .cabecalho{
+
+@media (min-width:1024px) {
+  .cabecalho {
     padding: 14px 40px;
     display: grid;
     grid-template-columns: auto 1fr auto;
     align-items: center;
     column-gap: 24px;
   }
-  .nome-banda h1{ font-size: 24px; }
-  .home{ min-height: calc(100vh - 80px); }
-  .logo{ justify-self: start; }
-  .menu{
-    position: static;
-    display: flex !important;
-    justify-content: center;
-    gap: 28px;
-    background: transparent;
-    padding: 0;
-    box-shadow: none;
+
+  .nome-banda h1 {
+    font-size: 24px
   }
-  .botao-show{ justify-self: end; }
-  .sobre{ padding: 60px 40px 80px; gap: 40px; }
-  .conteudo-texto h1{ font-size: 34px; }
-  .conteudo-fotos{
-    position: relative;
+
+  .home {
+    min-height: calc(100vh - 80px)
+  }
+
+  .logo {
+    justify-self: start
+  }
+
+  .menu {
+    justify-content: center
+  }
+
+  .botao-show {
+    justify-self: end
+  }
+
+  .sobre {
+    padding: 60px 40px 80px;
+    gap: 40px
+  }
+
+  .conteudo-texto h1 {
+    font-size: 34px
+  }
+
+  /* Centralizar as fotos do "sobre" em desktop grande */
+  .conteudo-fotos {
     display: flex;
     justify-content: center;
     align-items: center;
-    min-height: 300px;
+    min-height: 300px
   }
-  .conteudo-fotos img:nth-child(1){
-    position: absolute; top: 0; left: 15%; transform: rotate(-6deg);
+
+  .conteudo-fotos img:nth-child(1) {
+    top: 0;
+    left: 15%
   }
-  .conteudo-fotos img:nth-child(2){
-    position: absolute; top: 0; left: 50%; transform: rotate(5deg);
+
+  .conteudo-fotos img:nth-child(2) {
+    top: 0;
+    left: 50%
   }
-  .conteudo-fotos img:nth-child(3){
-    position: absolute; top: 130px; left: 32%; transform: rotate(-3deg);
+
+  .conteudo-fotos img:nth-child(3) {
+    top: 130px;
+    left: 32%
   }
-  .destaques-home{ padding: 40px; gap: 32px; }
-  .lista-musicas{ gap: 16px; }
-  .musica-item{ grid-template-columns: 72px 1fr auto; }
+
+  .destaques-home {
+    padding: 40px;
+    gap: 32px
+  }
+
+  .lista-musicas {
+    gap: 16px
+  }
+
+  .musica-item {
+    grid-template-columns: 72px 1fr auto
+  }
 }
 
+/* =========================================
+   Utilitários
+========================================= */
+.hidden {
+  display: none !important
+}
 
-
-
-
-
-
+.center {
+  text-align: center
+}
