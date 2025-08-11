@@ -7,7 +7,7 @@
 body {
   background-color: #000; /* fundo preto */
   color: #fff;
-  font-family: 'Roboto',sans-serif
+  font-family: 'Roboto', sans-serif;
 }
 
 /* Cabeçalho com layout flex */
@@ -19,19 +19,11 @@ body {
   border-bottom: 1px solid gray;
 }
 
-.nome-banda h1 {
-  font-family: 'RocknRoll One', sans-serif;
-  font-size: 20px;
-  color: #8B5CF6;
-  margin: 0;
-  line-height: 1.2;
-}
-
 .logo {
-    flex: 1;
-    display: flex;
-    align-items: center;
-    gap: 15px;
+  flex: 1;
+  display: flex;
+  align-items: center;
+  gap: 15px;
 }
 
 /* Logo circular */
@@ -51,8 +43,9 @@ body {
 }
 
 .nome-banda h1 {
+  font-family: 'RocknRoll One', sans-serif;
   font-size: 20px;
-  color: #8B5CF6; /* Roxo */
+  color: #8B5CF6;
   margin: 0;
   line-height: 1.2;
 }
@@ -66,32 +59,31 @@ body {
 
 /* Menu centralizado */
 .menu {
-    flex: 1;
-    display: flex;
-    justify-content: center;
-    gap: 60px;
-    align-items: center;
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  gap: 60px;
+  align-items: center;
 }
 
 .menu a {
-    display: flex;
-    align-items: center;
-    gap: 6px;
-    color: #ffffff; 
-    text-decoration: none;
-    font-size: 14px;
-    font-weight: bold;
-    transition: color 0.3s;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  color: #ffffff;
+  text-decoration: none;
+  font-size: 14px;
+  font-weight: bold;
+  transition: color 0.3s;
 }
 
-.menu a i{
-    font-size: 18px;
+.menu a i {
+  font-size: 18px;
 }
 
 .menu a:hover {
   color: #8B5CF6;
 }
-
 
 .botao-show {
   flex: 1;
@@ -114,6 +106,7 @@ body {
   background-color: #8B5CF6;
 }
 
+/* Home com imagem de fundo */
 .home {
   position: relative;
   display: flex;
@@ -125,32 +118,26 @@ body {
 }
 
 .home .background {
-  background-size: contain; /* mantém a imagem inteira */
-  background-position: top center; /* gruda no topo */
-  background-repeat: no-repeat;
-  background-color: black;
-  width: 100%;
-  height: 100vh;
-}
-
-.home h1 {
-  font-family: 'RocknRoll One', sans-serif;
-  font-size: 35px;
-}
-
-.background {
   position: absolute;
   top: 0;
   left: 0;
   width: 100%;
   height: 100%;
   background-image: url('../FOTOS/Inicial.JPG');
-  background-size: cover;
-  background-position: center;
+  background-size: contain; /* mantém a imagem inteira */
+  background-position: top center; /* gruda no topo */
   background-repeat: no-repeat;
+  background-color: black;
   mask-image: linear-gradient(to bottom, rgba(0,0,0,1) 60%, rgba(0,0,0,0));
   -webkit-mask-image: linear-gradient(to bottom, rgba(0,0,0,1) 60%, rgba(0,0,0,0));
   z-index: 0;
+}
+
+.home h1 {
+  font-family: 'RocknRoll One', sans-serif;
+  font-size: 35px;
+  position: relative;
+  z-index: 1;
 }
 
 .content {
@@ -160,8 +147,6 @@ body {
   right: 40px;
   color: white;
 }
-
-
 
 .logo-central {
   position: absolute;
@@ -175,6 +160,7 @@ body {
   z-index: 2;
 }
 
+/* Sobre a banda */
 .sobre {
   display: flex;
   align-items: flex-start;
@@ -183,7 +169,7 @@ body {
   padding: 60px 80px;
   background-color: #000;
   color: white;
-  flex-wrap: wrap; 
+  flex-wrap: wrap;
   max-width: 1200px;
   margin: 0 auto;
 }
@@ -200,7 +186,6 @@ body {
   margin-bottom: 20px;
 }
 
-
 .conteudo-texto p {
   font-size: 16px;
   line-height: 1.7;
@@ -212,7 +197,6 @@ body {
   position: relative;
   height: 280px;
 }
-
 
 .conteudo-fotos img {
   position: absolute;
@@ -243,20 +227,20 @@ body {
   z-index: 1;
 }
 
-/* Efeito hover para dar destaque */
+/* Efeito hover para destaque */
 .conteudo-fotos img:hover {
   transform: rotate(0deg) scale(1.1);
   z-index: 10;
   box-shadow: 0 10px 30px rgba(139, 92, 246, 0.9);
 }
 
-
+/* Botões sociais e links */
 .botoes-links {
   display: flex;
-  justify-content: center;   /* Centraliza horizontalmente */
-  gap: 20px;                 /* Espaço entre os botões */
-  padding: 40px 0;           /* Espaço acima e abaixo */
-  flex-wrap: wrap;           /* Se a tela for pequena, eles quebram linha */
+  justify-content: center;
+  gap: 20px;
+  padding: 40px 0;
+  flex-wrap: wrap;
 }
 
 .botao {
@@ -290,6 +274,7 @@ body {
   background-color: #C13584; /* Roxo Instagram */
 }
 
+/* Formulário de contrato */
 .formulario-contrato {
   display: flex;
   flex-direction: column;
@@ -325,8 +310,7 @@ body {
   background-color: #cc0044;
 }
 
-
-
+/* Rodapé */
 .rodape {
   background-color: #8B5CF6; /* Roxo da identidade visual */
   color: white;
@@ -341,7 +325,7 @@ body {
   gap: 8px;
 }
 
-/* Container do destaque (próximo lançamento) */
+/* Música destaque (próximo lançamento) */
 .musica-destaque {
   background-color: #111;
   padding: 20px;
@@ -429,6 +413,7 @@ body {
   margin-left: 6px;
 }
 
+/* Botão play Spotify */
 .botao-play {
   background-color: #1DB954;
   border: none;
@@ -448,13 +433,12 @@ body {
   background-color: #1ed760;
 }
 
-/* Ícone do Spotify dentro do botão */
 .botao-play i {
   font-size: 20px;
   color: white;
 }
 
-
+/* Agenda */
 .agenda-container {
   max-width: 1000px;
   margin: auto;
@@ -507,12 +491,15 @@ body {
 a {
   color: #00ff88;
   text-decoration: none;
+  transition: color 0.3s;
 }
 
 a:hover {
   text-decoration: underline;
+  color: #8B5CF6;
 }
 
+/* Bloco de álbum */
 .bloco-album {
   margin-bottom: 40px;
 }
@@ -526,6 +513,7 @@ a:hover {
   padding-bottom: 5px;
 }
 
+/* Destaques na home */
 .destaques-home {
   display: flex;
   flex-wrap: wrap;
@@ -564,6 +552,8 @@ a:hover {
 .destaque-box p {
   margin: 5px 0;
 }
+
+/* Contato */
 .contato-container {
   max-width: 800px;
   margin: 60px auto;
@@ -603,28 +593,6 @@ a:hover {
   color: #8B5CF6;
 }
 
-@media (max-width: 600px) {
-  .contato-container {
-    margin: 30px 20px;
-    padding: 20px;
-  }
-
-  .contato-info {
-    font-size: 16px;
-  }
-}
-
-.musica-destaque-home p a {
-  color: #8B5CF6;
-  font-size: 26px;
-  font-weight: bold;
-  text-decoration: none;
-}
-
-.musica-destaque-home p a:hover {
-  text-decoration: underline;
-}
-
 /* Menu hambúrguer escondido no desktop */
 .menu-mobile {
   display: none;
@@ -653,9 +621,9 @@ a:hover {
   }
 
   .menu {
-    display: none;                 /* escondido por padrão */
+    display: none; /* escondido por padrão */
     flex-direction: column;
-    background: rgba(0,0,0,0.98);
+    background: rgba(0, 0, 0, 0.98);
     position: absolute;
     top: 64px;
     right: 12px;
@@ -664,11 +632,11 @@ a:hover {
     z-index: 1000;
     min-width: 160px;
     gap: 8px;
-    box-shadow: 0 8px 20px rgba(0,0,0,0.6);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.6);
   }
 
   .menu.ativo {
-    display: flex;                 /* quando tiver classe .ativo o menu aparece */
+    display: flex; /* quando tiver classe .ativo o menu aparece */
   }
 
   .menu a {
@@ -683,20 +651,20 @@ a:hover {
 
   /* --- IMAGEM DE FUNDO (home) NO MOBILE --- */
   .home {
-    height: auto;                  /* evita cortar a imagem */
-    min-height: 60vh;              /* controla a altura inicial */
+    height: auto; /* evita cortar a imagem */
+    min-height: 60vh; /* controla a altura inicial */
   }
 
   .home .background {
-  background-size: contain; /* mostra a imagem inteira */
-  background-position: center center;
-  background-repeat: no-repeat;
-  background-color: black; /* cor de fundo para preencher as sobras */
-  width: 100%;
-  height: 100vh; /* ocupa toda a altura da tela */
-}
+    background-size: contain; /* mostra a imagem inteira */
+    background-position: center center;
+    background-repeat: no-repeat;
+    background-color: black; /* cor de fundo para preencher as sobras */
+    width: 100%;
+    height: 100vh; /* ocupa toda a altura da tela */
+  }
 
-  /* se tiver logo-central perto do rodapé, ajusta posição para mobile */
+  /* Ajusta logo-central para mobile */
   .logo-central {
     width: 110px;
     height: 110px;
@@ -704,14 +672,40 @@ a:hover {
     right: 20px;
   }
 
-  /* Outros ajustes de espaçamento que quebrariam no mobile */
+  /* Ajustes de espaçamento que quebrariam no mobile */
   .sobre {
     padding: 30px 20px;
     gap: 20px;
   }
 
-  .conteudo-texto { max-width: 100%; flex: 1 1 100%; }
-  .conteudo-fotos { order: 2; width: 100%; height: auto; position: relative; margin-top: 20px; }
-  .conteudo-fotos img { position: relative; max-height: 180px; width: auto; }
+  .conteudo-texto {
+    max-width: 100%;
+    flex: 1 1 100%;
+  }
+
+  .conteudo-fotos {
+    order: 2;
+    width: 100%;
+    height: auto;
+    position: relative;
+    margin-top: 20px;
+  }
+
+  .conteudo-fotos img {
+    position: relative;
+    max-height: 180px;
+    width: auto;
+  }
 }
+
+/* Links gerais */
+a {
+  color: #00ff88;
+  text-decoration: none;
+}
+
+a:hover {
+  text-decoration: underline;
+}
+
 
