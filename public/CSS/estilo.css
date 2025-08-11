@@ -134,26 +134,28 @@ body {
 ------------------------------ */
 .home{
   position: relative;
-  min-height: 70vh;           /* mobile-first: ocupa boa parte da tela */
-  display: grid;
-  place-items: center;
   overflow: hidden;
-  isolation: isolate;         /* garante camadas corretas */
+  isolation: isolate;
+  /* mobile-first: altura se adapta ao conteúdo da foto */
 }
 
 /* Background com máscara suave para o rodapé do hero */
 .background{
-  position: absolute;
-  inset: 0;
-  background-image: url('../FOTOS/Inicial.JPG');
-  background-repeat: no-repeat;
-  background-size: cover;          /* cobre sem deformar */
-  background-position: top center; /* prioriza topo (cabecalho) */
+  position: relative;
 }
+
+.hero-photo{
+  width: 100%;
+  height: auto;        /* preserva proporção, nunca corta */
+  display: block;
+}
+
+
 .background::after{
   content: "";
   position: absolute;
   inset: 0;
+  /* degrade leve no rodapé */
   background: linear-gradient(to bottom, rgba(0,0,0,0) 55%, rgba(0,0,0,.9) 100%);
   pointer-events: none;
 }
@@ -166,16 +168,16 @@ body {
 }
 
 /* Logo central SEM SUMIR e realmente centralizada */
-.logo-central {
+.logo-central{
   position: absolute;
   z-index: 2;
-  width: 120px;
-  height: 120px;
+  right: 20px;
+  bottom: 20px;
+  width: 140px;   /* maior de cara no mobile */
+  height: 140px;
   border-radius: 50%;
   border: 3px solid var(--brand);
   box-shadow: 0 0 20px var(--brand);
-  right: 20px;   /* distância da borda direita */
-  bottom: 40px;  /* distância da borda inferior */
   object-fit: cover;
 }
 
@@ -449,9 +451,7 @@ a:hover{ text-decoration: underline; }
   .menu a{ padding: 0; }
 
   .botao-show{ display: flex; justify-content: flex-end; flex: 0 0 auto; }
-  .home{
-    min-height: 100vh;      /* ocupa a tela toda */
-  }
+  .home{ min-height: calc(100vh - 72px); } 
   .background{
     background-size: contain;      /* mostra a imagem inteira */
     background-position: top center;
@@ -461,13 +461,10 @@ a:hover{ text-decoration: underline; }
 
   /* logo no canto inferior direito no mobile */
   .logo-central{
-    width: 120px;
-    height: 120px;
-    right: 20px;
-    bottom: 20px;
-    left: auto;
-    top: auto;
-    transform: none;
+    width: 170px;
+    height: 170px;
+    right: 40px;
+    bottom: 40px;
   }
 
   .sobre{
@@ -497,7 +494,7 @@ a:hover{ text-decoration: underline; }
   .nome-banda h1{ font-size: 24px; }
 
   .home{ min-height: calc(100vh - 80px); }
-  
+
   .logo{ justify-self: start; }
 
   .menu{
@@ -520,7 +517,6 @@ a:hover{ text-decoration: underline; }
   .lista-musicas{ gap: 16px; }
   .musica-item{ grid-template-columns: 72px 1fr auto; }
 }
-
 
 
 
