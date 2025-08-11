@@ -125,12 +125,13 @@ body {
 }
 
 .home .background {
-  background-size: contain; /* mantém a imagem inteira */
-  background-position: top center; /* gruda no topo */
+  background-size: contain;
+  background-position: top center;
   background-repeat: no-repeat;
   background-color: black;
   width: 100%;
-  height: 100vh;
+  min-height: auto; /* deixa a altura se ajustar ao conteúdo */
+  aspect-ratio: 16 / 9; /* mantém proporção */
 }
 
 .home h1 {
@@ -688,11 +689,10 @@ a:hover {
   }
 
   .home .background {
-    height: 60vh !important;              /* altura visível */
-    background-size: contain !important;  /* mostra a imagem inteira */
-    background-position: center center !important;
-    background-repeat: no-repeat !important;
+    aspect-ratio: auto; /* libera proporção para mobile */
+    height: auto;
   }
+}
 
   /* se tiver logo-central perto do rodapé, ajusta posição para mobile */
   .logo-central {
@@ -712,5 +712,6 @@ a:hover {
   .conteudo-fotos { order: 2; width: 100%; height: auto; position: relative; margin-top: 20px; }
   .conteudo-fotos img { position: relative; max-height: 180px; width: auto; }
 }
+
 
 
