@@ -622,6 +622,8 @@ a:hover {
   font-size: 2rem;
   cursor: pointer;
   color: white;
+  user-select: none;
+  z-index: 1001;
 }
 
 /* Menu normal no desktop */
@@ -633,31 +635,71 @@ a:hover {
 /* Ajustes para telas pequenas */
 @media (max-width: 768px) {
 
-  /* Mostra o botão hambúrguer e esconde o menu */
+  /* mostra o botão e esconde o menu por padrão */
   .menu-mobile {
     display: block;
+    position: absolute;
+    top: 14px;
+    right: 18px;
   }
 
   .menu {
-    display: none;
+    display: none;                 /* escondido por padrão */
     flex-direction: column;
-    background: black;
+    background: rgba(0,0,0,0.98);
     position: absolute;
-    top: 70px;
-    right: 20px;
-    padding: 10px;
-    border-radius: 5px;
-    z-index: 999;
+    top: 64px;
+    right: 12px;
+    padding: 10px 14px;
+    border-radius: 8px;
+    z-index: 1000;
+    min-width: 160px;
+    gap: 8px;
+    box-shadow: 0 8px 20px rgba(0,0,0,0.6);
   }
 
   .menu.ativo {
-    display: flex;
+    display: flex;                 /* quando tiver classe .ativo o menu aparece */
   }
 
-  /* Ajusta imagem de fundo da home */
-  .home .background {
-    background-size: contain !important; /* Mostra a imagem inteira no mobile */
-    background-position: center;
-    background-repeat: no-repeat;
+  .menu a {
+    padding: 8px 4px;
+    white-space: nowrap;
   }
+
+  /* Ajustes do header pra mobile (mantém logo e botão alinhados) */
+  .cabecalho {
+    padding: 8px 14px;
+  }
+
+  /* --- IMAGEM DE FUNDO (home) NO MOBILE --- */
+  .home {
+    height: auto;                  /* evita cortar a imagem */
+    min-height: 60vh;              /* controla a altura inicial */
+  }
+
+  .home .background {
+    height: 60vh !important;              /* altura visível */
+    background-size: contain !important;  /* mostra a imagem inteira */
+    background-position: center center !important;
+    background-repeat: no-repeat !important;
+  }
+
+  /* se tiver logo-central perto do rodapé, ajusta posição para mobile */
+  .logo-central {
+    width: 110px;
+    height: 110px;
+    bottom: 30px;
+    right: 20px;
+  }
+
+  /* Outros ajustes de espaçamento que quebrariam no mobile */
+  .sobre {
+    padding: 30px 20px;
+    gap: 20px;
+  }
+
+  .conteudo-texto { max-width: 100%; flex: 1 1 100%; }
+  .conteudo-fotos { order: 2; width: 100%; height: auto; position: relative; margin-top: 20px; }
+  .conteudo-fotos img { position: relative; max-height: 180px; width: auto; }
 }
