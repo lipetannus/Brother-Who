@@ -3,119 +3,157 @@
 <head>
   <meta charset="UTF-8" />
   <title>Agenda - Brother Who</title>
-  <link rel="stylesheet" href="../CSS/estilo.css" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <!-- Fonts e ícones -->
   <link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet" />
-  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" />
   <link href="https://fonts.googleapis.com/css2?family=RocknRoll+One&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+
+  <!-- CSS -->
+  <link rel="stylesheet" href="../CSS/estilo.css" />
 </head>
 <body>
 
   <!-- Cabeçalho -->
   <header class="cabecalho">
+    <div id="menuToggle" class="menu-mobile">☰</div>
+
     <div class="logo">
-      <img src="../CAPAS/Logo B-who (1).png" alt="Logo Brother Who">
-      <a href="../index.html" class="nome-banda" style="text-decoration: none; color: inherit;">
+      <img src="../CAPAS/Logo B-who (1).png" alt="Logo Brother Who" />
+      <a href="../index.html" class="nome-banda">
         <h1>Brother Who</h1>
-        <p>Rock & Metal | São Paulo </p>
+        <p>Rock & Metal | São Paulo</p>
       </a>
     </div>
-    <nav class="menu">
-      <a href="agenda.html"><i class="ph-calendar"></i> Agenda</a>
-      <a href="musicas.html"><i class="ph-music-note"></i> Músicas</a>
-      <a href="contato.html"><i class="ph-users"></i> Contato</a>
+
+    <nav class="menu" aria-label="Navegação principal">
+      <a href="agenda.html"><i class="fa-solid fa-calendar-days"></i> Agenda</a>
+      <a href="musicas.html"><i class="fa-solid fa-music"></i> Músicas</a>
+      <a href="contato.html"><i class="fa-solid fa-user-group"></i> Contato</a>
     </nav>
+
     <div class="botao-show">
       <a href="../pages/contratar.html">
-        <button>Contratar Show</button>
+        <button type="button">Contratar Show</button>
       </a>
     </div>
   </header>
 
-
   <main>
-    <section class="sobre">
+    <!-- Título da página -->
+    <section class="sobre" aria-labelledby="titulo-agenda">
       <div class="conteudo-texto">
-          <h1>Agenda de Shows</h1>
+        <h1 id="titulo-agenda">Agenda de Shows</h1>
+        <!-- Pode inserir um parágrafo aqui, se quiser um subtítulo/descrição -->
       </div>
+    </section>
+
+    <!-- Listas da agenda -->
+    <div class="agenda-container">
+      <section class="secao" aria-labelledby="titulo-proximo">
+        <h3 id="titulo-proximo"><i class="fa-solid fa-microphone"></i> Próximo Show</h3>
+        <div id="proximo-lista" class="lista-shows"></div>
+      </section>
+
+      <section class="secao" aria-labelledby="titulo-embreve">
+        <h3 id="titulo-embreve"><i class="fa-solid fa-calendar-days"></i> Em Breve</h3>
+        <div id="em-breve-lista" class="lista-shows"></div>
+      </section>
+
+      <section class="secao" aria-labelledby="titulo-aconteceu">
+        <h3 id="titulo-aconteceu"><i class="fa-solid fa-square-check"></i> Já Aconteceram</h3>
+        <div id="aconteceu-lista" class="lista-shows"></div>
+      </section>
+    </div>
   </main>
 
-  <div class="agenda-container">
-
-    <div class="secao">
-      <h3><i class="fa-solid fa-microphone"></i> Próximo Show</h3>
-      <div id="proximo-lista" class="lista-shows"></div>
-    </div>
-
-    <div class="secao">
-      <h3><i class="fa-solid fa-calendar-days"></i> Em Breve</h3>
-      <div id="em-breve-lista" class="lista-shows"></div>
-    </div>
-
-    <div class="secao">
-      <h3><i class="fa-solid fa-square-check"></i> Já Aconteceram</h3>
-      <div id="aconteceu-lista" class="lista-shows"></div>
-    </div>
-  </div>
-
-  <script>
-  fetch("https://opensheet.elk.sh/1SeaT_oYgJwLiR7Q-zQuBcJ75Q5QtZhhMgf37qwIbmrk/Página1")
-    .then(res => res.json())
-    .then(data => {
-      const proximoLista = document.getElementById("proximo-lista");
-      const emBreveLista = document.getElementById("em-breve-lista");
-      const aconteceuLista = document.getElementById("aconteceu-lista");
-
-      data.forEach(show => {
-        const status = show.Status.trim().toLowerCase();
-        const item = document.createElement("div");
-        item.className = "agenda-item";
-
-        const foto = show["Caminho da Foto foto do local"];
-
-        // Cria o conteúdo HTML do bloco
-        let html = `
-          <div class="agenda-conteudo">
-            <div class="foto-local">
-              <img src="${foto}" alt="Foto do local" />
-            </div>
-            <div class="info-local">
-              <h4>${show.Local} - ${show.Cidade}</h4>
-              <p><strong>Data:</strong> ${show.Data} às ${show.Hora}</p>
-              <p>
-                <a href="${show["Link do Local"]}" target="_blank">📍 Local</a>
-                ${status === "já aconteceu" && show["Link de Fotos"] ? ` | <a href="${show["Link de Fotos"]}" target="_blank">📸 Fotos</a>` : ""}
-              </p>
-            </div>
-          </div>
-        `;
-
-        item.innerHTML = html;
-
-        if (status === "próximo") {
-          proximoLista.appendChild(item);
-        } else if (status === "em breve") {
-          emBreveLista.appendChild(item);
-        } else if (status === "já aconteceu") {
-          aconteceuLista.appendChild(item);
-        }
-      });
-    })
-    .catch(err => {
-      console.error("Erro:", err);
-      document.querySelector(".agenda-container").innerHTML = "<p>Erro ao carregar agenda. Tente mais tarde.</p>";
-    });
-  </script>
-
-
-
+  <!-- Rodapé -->
   <footer class="rodape">
     <div class="rodape-conteudo">
       <p>&copy; 2025 Brother Who. Todos os direitos reservados.</p>
-      <p>São Paulo - SP | Contato: bandabrotherwho@gmail.com</p>
+      <p>São Paulo - SP | Contato: <a href="mailto:bandabrotherwho@gmail.com">bandabrotherwho@gmail.com</a></p>
     </div>
   </footer>
 
+  <!-- JS: menu mobile + agenda -->
+  <script>
+    // Toggle do menu hambúrguer (compatível com o CSS atual)
+    (function () {
+      const toggle = document.getElementById('menuToggle');
+      const menu = document.querySelector('.menu');
+
+      if (toggle && menu) {
+        const closeMenu = () => menu.classList.remove('ativo');
+
+        toggle.addEventListener('click', (e) => {
+          e.stopPropagation();
+          menu.classList.toggle('ativo');
+        });
+
+        // Fecha ao clicar fora
+        document.addEventListener('click', (e) => {
+          if (!menu.contains(e.target) && e.target !== toggle) closeMenu();
+        });
+
+        // Fecha com ESC
+        document.addEventListener('keydown', (e) => {
+          if (e.key === 'Escape') closeMenu();
+        });
+      }
+    })();
+  </script>
+
+  <script>
+    // Carrega a planilha e popula as listas
+    fetch("https://opensheet.elk.sh/1SeaT_oYgJwLiR7Q-zQuBcJ75Q5QtZhhMgf37qwIbmrk/Página1")
+      .then(res => res.json())
+      .then(data => {
+        const proximoLista = document.getElementById("proximo-lista");
+        const emBreveLista = document.getElementById("em-breve-lista");
+        const aconteceuLista = document.getElementById("aconteceu-lista");
+
+        data.forEach(show => {
+          const status = (show.Status || "").trim().toLowerCase();
+          const item = document.createElement("div");
+          item.className = "agenda-item";
+
+          const foto = show["Caminho da Foto foto do local"] || "";
+
+          // Bloco lado a lado (foto | infos) — já estilizado no CSS
+          item.innerHTML = `
+            <div class="agenda-conteudo">
+              <div class="foto-local">
+                <img src="${foto}" alt="Foto do local do show" loading="lazy" />
+              </div>
+              <div class="info-local">
+                <h4>${show.Local || ""} - ${show.Cidade || ""}</h4>
+                <p><strong>Data:</strong> ${show.Data || ""} ${show.Hora ? `às ${show.Hora}` : ""}</p>
+                <p>
+                  ${show["Link do Local"] ? `<a href="${show["Link do Local"]}" target="_blank" rel="noopener">📍 Local</a>` : ""}
+                  ${status === "já aconteceu" && show["Link de Fotos"] ? ` | <a href="${show["Link de Fotos"]}" target="_blank" rel="noopener">📸 Fotos</a>` : ""}
+                </p>
+              </div>
+            </div>
+          `;
+
+          if (status === "próximo") {
+            proximoLista.appendChild(item);
+          } else if (status === "em breve") {
+            emBreveLista.appendChild(item);
+          } else if (status === "já aconteceu") {
+            aconteceuLista.appendChild(item);
+          }
+        });
+      })
+      .catch(err => {
+        console.error("Erro:", err);
+        document.querySelector(".agenda-container").innerHTML = "<p>Erro ao carregar agenda. Tente mais tarde.</p>";
+      });
+  </script>
+
 </body>
 </html>
+
+
 
