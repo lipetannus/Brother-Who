@@ -896,6 +896,31 @@ input:-webkit-autofill {
   .grid-3 {
     grid-template-columns: 2fr 1fr 1fr
   }
+  .conteudo-fotos {
+    position: relative;
+    min-height: 220px; /* altura reduzida para caber melhor */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .conteudo-fotos img {
+    max-height: 140px; /* diminui as fotos no mobile */
+    width: auto;
+  }
+
+  .conteudo-fotos img:nth-child(1) {
+    top: 0;
+    left: 10%;
+  }
+  .conteudo-fotos img:nth-child(2) {
+    top: 0;
+    left: 50%;
+  }
+  .conteudo-fotos img:nth-child(3) {
+    top: 100px;
+    left: 30%;
+  }
 }
 
 @media (min-width:1024px) {
