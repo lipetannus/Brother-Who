@@ -449,9 +449,26 @@ a:hover{ text-decoration: underline; }
   .menu a{ padding: 0; }
 
   .botao-show{ display: flex; justify-content: flex-end; flex: 0 0 auto; }
+  .home{
+    min-height: 100vh;      /* ocupa a tela toda */
+  }
+  .background{
+    background-size: contain;      /* mostra a imagem inteira */
+    background-position: top center;
+    background-repeat: no-repeat;
+    background-color: #000;        /* bordas pretas nas “sobras” */
+  }
 
-  .home{ min-height: calc(100vh - 72px); }
-  .logo-central{ width: 150px; height: 150px; }
+  /* logo no canto inferior direito no mobile */
+  .logo-central{
+    width: 120px;
+    height: 120px;
+    right: 20px;
+    bottom: 20px;
+    left: auto;
+    top: auto;
+    transform: none;
+  }
 
   .sobre{
     grid-template-columns: 1.1fr .9fr; /* texto + fotos lado a lado */
@@ -470,11 +487,30 @@ a:hover{ text-decoration: underline; }
 
 /* >= 1024px: ajustes para desktop grande */
 @media (min-width: 1024px){
-  .cabecalho{ padding: 14px 40px; }
+  .cabecalho{
+    padding: 14px 40px;
+    display: grid;
+    grid-template-columns: auto 1fr auto; /* logo | menu (centro) | botão */
+    align-items: center;
+    column-gap: 24px;
+  }
   .nome-banda h1{ font-size: 24px; }
 
   .home{ min-height: calc(100vh - 80px); }
-  .logo-central{ width: 170px; height: 170px; }
+  
+  .logo{ justify-self: start; }
+
+  .menu{
+    position: static;
+    display: flex !important;
+    justify-content: center;   /* centraliza os links */
+    gap: 28px;
+    background: transparent;
+    padding: 0;
+    box-shadow: none;
+  }
+  .botao-show{ justify-self: end; }
+
 
   .sobre{ padding: 60px 40px 80px; gap: 40px; }
   .conteudo-texto h1{ font-size: 34px; }
@@ -484,6 +520,8 @@ a:hover{ text-decoration: underline; }
   .lista-musicas{ gap: 16px; }
   .musica-item{ grid-template-columns: 72px 1fr auto; }
 }
+
+
 
 
 
