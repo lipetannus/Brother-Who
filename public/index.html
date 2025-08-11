@@ -1,31 +1,38 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
-
 <head>
   <meta charset="UTF-8">
   <title>Brother Who</title>
-  <link rel="stylesheet" href="CSS/estilo.css">
-  <link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet">
-  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-  <link href="https://fonts.googleapis.com/css2?family=RocknRoll+One&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
-</head>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
+  <!-- Fonts e Ícones -->
+  <link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=RocknRoll+One&display=swap" rel="stylesheet">
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet">
+
+  <!-- CSS -->
+  <link rel="stylesheet" href="CSS/estilo.css">
+</head>
 <body>
+
+  <!-- Cabeçalho -->
   <header class="cabecalho">
     <div id="menuToggle" class="menu-mobile">☰</div>
+
     <div class="logo">
-      <img src="CAPAS/Logo B-who (1).png">
-      <a href="index.html" class="nome-banda" style="text-decoration: none; color: inherit;">
+      <img src="CAPAS/Logo B-who (1).png" alt="Logo Brother Who">
+      <a href="index.html" class="nome-banda">
         <h1>Brother Who</h1>
-        <p>Rock & Metal | São Paulo </p>
+        <p>Rock & Metal | São Paulo</p>
       </a>
     </div>
+
     <nav class="menu">
       <a href="pages/agenda.html"><i class="ph-calendar"></i> Agenda</a>
       <a href="pages/musicas.html"><i class="ph-music-note"></i> Músicas</a>
       <a href="pages/contato.html"><i class="ph-users"></i> Contato</a>
     </nav>
+
     <div class="botao-show">
       <a href="pages/contratar.html">
         <button>Contratar Show</button>
@@ -33,13 +40,14 @@
     </div>
   </header>
 
+  <!-- Seção inicial (home) -->
   <section class="home">
     <div class="background"></div>
     <div class="content"></div>
-    <img class="logo-central" src="CAPAS/Logo B-who (1).png" alt="Logo Brother Who">
+    <img class="logo-central" src="CAPAS/Logo B-who (1).png" alt="Logo Brother Who central">
   </section>
 
-
+  <!-- Botões de redes sociais -->
   <section class="botoes-links">
     <a href="https://open.spotify.com/intl-pt/artist/1REWSbM48DBi13WckAcYAh?si=GJvkxuIOSYS0dZuJGa7ADQ" target="_blank" class="botao spotify">
       <i class="fab fa-spotify"></i> Spotify
@@ -52,41 +60,42 @@
     </a>
   </section>
 
+  <!-- Quem Somos -->
   <section class="sobre">
     <div class="conteudo-texto">
       <h1>Quem Somos</h1>
-      <p>Brother Who é uma banda de rock da capital do estado de São Paulo. Formada em 2022, o grupo é composto pelo compositor e vocalista Gezus, o baixista e backing vocal Bernardo Amaral, o guitarrista Paza, e o baterista Toti. Com influências em vários estilos como rap, reggae, metal, hardcore, que influenciaram o surgimento do estilo nu metal, caracterizado por bandas como Rage Against the Machine, Limp Bizkit, Sublime, Raimundos, Charlie Brown Jr e outras.</p>
+      <p>
+        Brother Who é uma banda de rock da capital do estado de São Paulo. 
+        Formada em 2022, o grupo é composto pelo compositor e vocalista Gezus, 
+        o baixista e backing vocal Bernardo Amaral, o guitarrista Paza, e o baterista Toti. 
+        Com influências em vários estilos como rap, reggae, metal, hardcore, que influenciaram 
+        o surgimento do estilo nu metal, caracterizado por bandas como Rage Against the Machine, 
+        Limp Bizkit, Sublime, Raimundos, Charlie Brown Jr e outras.
+      </p>
     </div>
 
     <div class="conteudo-fotos">
-      <img src="FOTOS/ensaio_bwho-7649.jpg" alt="Foto da Banda" />
-      <img src="FOTOS/ensaio_bwho-7651.jpg" alt="Foto da Banda" />
-      <img src="FOTOS/ensaio_bwho-7887.jpg" alt="Foto da Banda" />
+      <img src="FOTOS/ensaio_bwho-7649.jpg" alt="Foto 1 da banda Brother Who">
+      <img src="FOTOS/ensaio_bwho-7651.jpg" alt="Foto 2 da banda Brother Who">
+      <img src="FOTOS/ensaio_bwho-7887.jpg" alt="Foto 3 da banda Brother Who">
     </div>
   </section>
 
-  <!-- NOVA SEÇÃO COM OS DESTAQUES -->
+  <!-- Destaques (carregados via JS) -->
   <section class="destaques-home">
-    <div class="destaque-box" id="proximo-lancamento">
-      <!-- Carregado via JS -->
-    </div>
-    <div class="destaque-box" id="proximo-show">
-      <!-- Carregado via JS -->
-    </div>
+    <div class="destaque-box" id="proximo-lancamento"></div>
+    <div class="destaque-box" id="proximo-show"></div>
   </section>
 
+  <!-- Rodapé -->
   <footer class="rodape">
     <div class="rodape-conteudo">
-      <p>&copy; 2025 Brother Who. Todos os direitos reservados. São Paulo - SP | Contato: brotherwho@rockmail.com</p>
+      <p>&copy; 2025 Brother Who. Todos os direitos reservados.</p>
+      <p>São Paulo - SP | Contato: <a href="mailto:brotherwho@rockmail.com">brotherwho@rockmail.com</a></p>
     </div>
   </footer>
 
+  <!-- JS -->
   <script src="js/scripts.js"></script>
-
 </body>
-
 </html>
-
-
-
-
