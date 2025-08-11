@@ -13,9 +13,7 @@
 
 <body>
   <header class="cabecalho">
-    <div id="menuToggle" class="menu-mobile" onclick="document.querySelector('.menu').classList.toggle('ativo')">
-      ☰
-    </div>
+    <div id="menuToggle" class="menu-mobile">☰</div>
     <div class="logo">
       <img src="CAPAS/Logo B-who (1).png">
       <a href="index.html" class="nome-banda" style="text-decoration: none; color: inherit;">
@@ -82,67 +80,9 @@
     </div>
   </footer>
 
-  <script>
-    // toggle do menu mobile
-    const menuToggle = document.getElementById('menuToggle');
-    const menu = document.querySelector('.menu');
+  <script src="js/scripts.js"></script>
 
-    if (menuToggle && menu) {
-      menuToggle.addEventListener('click', () => {
-        menu.classList.toggle('ativo'); // mesmo nome que usamos no CSS
-      });
-
-      // fecha o menu ao clicar em um link (melhora UX)
-      menu.querySelectorAll('a').forEach(a => {
-        a.addEventListener('click', () => menu.classList.remove('ativo'));
-      });
-    }
-  </script>
-
-  <script>
-    // PRÓXIMO LANÇAMENTO (PÁGINA2)
-    fetch("https://opensheet.elk.sh/1SeaT_oYgJwLiR7Q-zQuBcJ75Q5QtZhhMgf37qwIbmrk/Página2")
-      .then(res => res.json())
-      .then(data => {
-        const destaque = document.getElementById("proximo-lancamento");
-        const proximo = data.find(m => m.Status?.trim().toLowerCase() === "próximo lançamento");
-
-        if (proximo) {
-          destaque.innerHTML = `
-            <h3>🎵 Próximo Lançamento</h3>
-            <img src="${proximo["Local Foto Capa"]}" alt="Capa da música ${proximo["Nome da Musica"]}" />
-            <p><strong>${proximo["Nome da Musica"]}</strong></p>
-            <p><em>Álbum: ${proximo.Album}</em></p>
-            <p><strong>Data:</strong> ${proximo["Data do Lançamento"]}</p>
-          `;
-        } else {
-          destaque.innerHTML = `<h3>🎵 Próximo Lançamento</h3><p>Nenhum lançamento encontrado.</p>`;
-        }
-      });
-
-    // PRÓXIMO SHOW (PÁGINA1)
-    fetch("https://opensheet.elk.sh/1SeaT_oYgJwLiR7Q-zQuBcJ75Q5QtZhhMgf37qwIbmrk/Página1")
-      .then(res => res.json())
-      .then(data => {
-        const box = document.getElementById("proximo-show");
-        const show = data.find(s => s.Status?.trim().toLowerCase() === "próximo");
-
-        if (show) {
-          box.innerHTML = `
-            <h3>🎤 Próximo Show</h3>
-            <img src="${show["Caminho da Foto foto do local"]}" alt="Foto do local" />
-            <p><strong>${show.Local}</strong> - ${show.Cidade}</p>
-            <p><strong>Data:</strong> ${show.Data} às ${show.Hora}</p>
-            <p><a href="${show["Link do Local"]}" target="_blank">📍 Ver local</a></p>
-          `;
-        } else {
-          box.innerHTML = `<h3>🎤 Próximo Show</h3><p>Nenhum show agendado.</p>`;
-        }
-      });
-  </script>
 </body>
 
 </html>
-
-
 
