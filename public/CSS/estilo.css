@@ -31,12 +31,12 @@ body {
   background: var(--bg);
   color: var(--fg);
   font-family: 'Roboto', sans-serif;
-  line-height: 1.5
+  line-height: 1.5;
 }
 
 img {
   max-width: 100%;
-  display: block
+  display: block;
 }
 
 button,
@@ -44,21 +44,21 @@ input,
 select,
 textarea {
   font: inherit;
-  color: inherit
+  color: inherit;
 }
 
 a {
   color: var(--accent);
-  text-decoration: none
+  text-decoration: none;
 }
 
 a:hover {
-  text-decoration: underline
+  text-decoration: underline;
 }
 
 :focus-visible {
   outline: 2px solid var(--brand);
-  outline-offset: 2px
+  outline-offset: 2px;
 }
 
 @media (prefers-reduced-motion:no-preference) {
@@ -68,8 +68,9 @@ a:hover {
   .botao,
   .botao-play,
   .musica-item,
-  .conteudo-fotos img {
-    transition: all .15s ease
+  .conteudo-fotos img,
+  .musica-destaque .cover {
+    transition: all .15s ease;
   }
 }
 
@@ -93,7 +94,7 @@ a:hover {
   display: flex;
   align-items: center;
   gap: 12px;
-  min-width: 0
+  min-width: 0;
 }
 
 .logo img {
@@ -101,43 +102,44 @@ a:hover {
   height: 56px;
   border-radius: 50%;
   object-fit: cover;
-  border: 2px solid var(--brand)
+  border: 2px solid var(--brand);
 }
 
 .nome-banda {
   display: flex;
   flex-direction: column;
+  color: inherit;
   text-decoration: none;
-  color: inherit
 }
 
 .nome-banda h1 {
   font-family: 'RocknRoll One', sans-serif;
   font-size: 20px;
   color: var(--brand);
-  line-height: 1.1
+  line-height: 1.1;
 }
 
 .nome-banda p {
   font-size: 13px;
-  color: var(--muted)
+  color: var(--muted);
 }
 
+/* hambúrguer */
 .menu-mobile {
   display: inline-block;
   font-size: 28px;
   line-height: 1;
   cursor: pointer;
   user-select: none;
-  margin-right: 6px
+  margin-right: 6px;
 }
 
+/* menu mobile abre do mesmo lado do botão (esquerda) */
 .menu {
   display: none;
   position: absolute;
   top: 64px;
   left: 12px;
-  /* abre do mesmo lado do botão */
   background: rgba(0, 0, 0, .98);
   padding: 10px 14px;
   border-radius: 10px;
@@ -151,7 +153,6 @@ a:hover {
   align-items: center;
   gap: 8px;
   color: var(--fg);
-  text-decoration: none;
   font-weight: 700;
   font-size: 14px;
   padding: 8px 4px;
@@ -160,11 +161,11 @@ a:hover {
 
 .menu a:hover,
 .menu a.ativo {
-  color: var(--brand)
+  color: var(--brand);
 }
 
 .menu.ativo {
-  display: flex
+  display: flex;
 }
 
 /* Botão "Contratar Show" também no mobile */
@@ -186,13 +187,13 @@ a:hover {
 
 .botao-show button:hover {
   transform: translateY(-1px);
-  opacity: .95
+  opacity: .95;
 }
 
 @media (max-width:360px) {
   .botao-show button {
     padding: 6px 10px;
-    font-size: 14px
+    font-size: 14px;
   }
 }
 
@@ -202,17 +203,17 @@ a:hover {
 .home {
   position: relative;
   overflow: hidden;
-  isolation: isolate
+  isolation: isolate;
 }
 
 .background {
-  position: relative
+  position: relative;
 }
 
 .hero-photo {
   width: 100%;
   height: auto;
-  display: block
+  display: block;
 }
 
 .background::after {
@@ -226,7 +227,7 @@ a:hover {
 .content {
   position: relative;
   z-index: 1;
-  color: #fff
+  color: #fff;
 }
 
 /* logo: mobile abaixo da foto; desktop sobreposta no canto */
@@ -250,7 +251,7 @@ a:hover {
   flex-wrap: wrap;
   gap: 12px;
   justify-content: center;
-  padding: 24px 16px 36px
+  padding: 24px 16px 36px;
 }
 
 .botao {
@@ -259,28 +260,27 @@ a:hover {
   gap: 8px;
   padding: 12px 18px;
   border-radius: 10px;
-  text-decoration: none;
   color: #fff;
   font-weight: 700;
-  font-size: 15px
+  font-size: 15px;
 }
 
 .botao:hover {
   transform: translateY(-1px);
-  opacity: .9
+  opacity: .9;
 }
 
 .botao.spotify {
   background: var(--spotify);
-  box-shadow: 0 0 8px #1DB95488
+  box-shadow: 0 0 8px #1DB95488;
 }
 
 .botao.youtube {
-  background: var(--youtube)
+  background: var(--youtube);
 }
 
 .botao.instagram {
-  background: var(--instagram)
+  background: var(--instagram);
 }
 
 /* =========================================
@@ -299,17 +299,17 @@ a:hover {
   font-family: 'RocknRoll One', sans-serif;
   font-size: 28px;
   color: var(--brand);
-  margin-bottom: 12px
+  margin-bottom: 12px;
 }
 
 .conteudo-texto p {
   font-size: 16px;
-  color: #ddd
+  color: #ddd;
 }
 
 .conteudo-fotos {
   position: relative;
-  min-height: 260px
+  min-height: 260px;
 }
 
 .conteudo-fotos img {
@@ -326,27 +326,27 @@ a:hover {
   top: 0;
   left: 8%;
   transform: rotate(-6deg);
-  z-index: 3
+  z-index: 3;
 }
 
 .conteudo-fotos img:nth-child(2) {
   top: 0;
   left: 52%;
   transform: rotate(5deg);
-  z-index: 2
+  z-index: 2;
 }
 
 .conteudo-fotos img:nth-child(3) {
   top: 120px;
   left: 30%;
   transform: rotate(-3deg);
-  z-index: 1
+  z-index: 1;
 }
 
 .conteudo-fotos img:hover {
   transform: rotate(0) scale(1.06);
   z-index: 10;
-  box-shadow: 0 10px 30px rgba(139, 92, 246, .9)
+  box-shadow: 0 10px 30px rgba(139, 92, 246, .9);
 }
 
 /* =========================================
@@ -366,13 +366,13 @@ a:hover {
   border: 1px solid var(--stroke);
   border-radius: var(--radius);
   padding: 18px;
-  box-shadow: var(--shadow)
+  box-shadow: var(--shadow);
 }
 
 .destaque-box h3 {
   color: var(--brand);
   font-size: 18px;
-  margin-bottom: 8px
+  margin-bottom: 8px;
 }
 
 .destaque-box img {
@@ -380,17 +380,17 @@ a:hover {
   max-height: 220px;
   object-fit: cover;
   border-radius: 8px;
-  margin-bottom: 10px
+  margin-bottom: 10px;
 }
 
 .destaque-box p {
-  color: #ddd
+  color: #ddd;
 }
 
 /* =========================================
    Músicas (destaque + lista)
 ========================================= */
-/* Header e títulos de seção */
+/* títulos da página/ seção */
 .page-header h1 {
   font-size: 40px;
   letter-spacing: .2px;
@@ -430,7 +430,7 @@ a:hover {
   border-radius: 999px;
 }
 
-/* Destaque com capa em “quadro” + badge */
+/* destaque */
 .musica-destaque {
   background: var(--card);
   border: 1px solid var(--stroke);
@@ -478,34 +478,37 @@ a:hover {
   object-fit: cover;
 }
 
+.musica-destaque .cover:hover {
+  transform: scale(1.02);
+}
+
 .musica-destaque h3 {
   font-family: 'RocknRoll One', sans-serif;
   font-size: 26px;
   color: var(--brand);
-  margin-bottom: 6px
+  margin-bottom: 6px;
 }
 
 .musica-destaque .meta {
   color: #cfcfcf;
   margin-top: 4px;
-  font-size: 15px
+  font-size: 15px;
 }
 
 .musica-destaque .countdown {
   margin-top: 14px;
-  border-radius: 12px
+  border-radius: 12px;
 }
 
 .musica-destaque .countdown .num {
-  font-size: 30px
+  font-size: 30px;
 }
 
-/* ---- Destaque: layout desktop corrigido (grid travado) ---- */
+/* desktop: trava em grid para manter alinhado */
 @media (min-width:768px) {
   .musica-destaque {
     display: grid;
     grid-template-columns: 260px 1fr;
-    /* capa | infos */
     column-gap: 24px;
     row-gap: 10px;
     align-items: start;
@@ -528,7 +531,6 @@ a:hover {
   .musica-destaque .countdown,
   .musica-destaque .countdown-live {
     grid-column: 2;
-    /* força tudo pra 2ª coluna */
   }
 
   .musica-destaque h3 {
@@ -544,17 +546,17 @@ a:hover {
   }
 }
 
-/* Lista de músicas / álbuns */
+/* lista de músicas */
 .lista-musicas {
   max-width: 900px;
   margin: 0 auto 48px;
   padding: 0 16px;
   display: grid;
-  gap: 14px
+  gap: 14px;
 }
 
 .bloco-album {
-  margin-bottom: 40px
+  margin-bottom: 40px;
 }
 
 .titulo-album {
@@ -589,30 +591,35 @@ a:hover {
   padding: 10px 12px;
 }
 
+.musica-item:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 6px 22px rgba(0, 0, 0, .35);
+}
+
 .musica-item img {
   width: 64px;
   height: 64px;
   object-fit: cover;
   border-radius: 8px;
-  box-shadow: 0 2px 6px #000
+  box-shadow: 0 2px 6px #000;
 }
 
 .musica-info {
   color: #ddd;
-  font-size: 16px
+  font-size: 16px;
 }
 
 .musica-info strong {
   font-family: 'RocknRoll One', sans-serif;
   color: var(--brand);
-  font-size: 18px
+  font-size: 18px;
 }
 
 .musica-info em {
   font-style: normal;
   color: #aaa;
   font-size: 14px;
-  margin-left: 6px
+  margin-left: 6px;
 }
 
 .botao-play {
@@ -630,28 +637,28 @@ a:hover {
 
 .botao-play:hover {
   transform: translateY(-1px);
-  opacity: .92
+  opacity: .92;
 }
 
 .botao-play i {
   color: #fff;
-  font-size: 20px
+  font-size: 20px;
 }
 
-/* Contagem regressiva (base) */
+/* countdown base */
 .countdown {
   margin-top: 12px;
   background: var(--card);
   border: 1px solid var(--stroke);
   border-radius: 10px;
-  padding: 12px
+  padding: 12px;
 }
 
 .countdown-grid {
   display: grid;
   grid-template-columns: repeat(4, minmax(60px, 1fr));
   gap: 10px;
-  align-items: stretch
+  align-items: stretch;
 }
 
 .countdown .box {
@@ -659,14 +666,14 @@ a:hover {
   border: 1px solid #222;
   border-radius: 10px;
   text-align: center;
-  padding: 10px 8px
+  padding: 10px 8px;
 }
 
 .countdown .num {
   font-family: 'RocknRoll One', sans-serif;
   font-size: 28px;
-  color: #8B5CF6;
-  line-height: 1
+  color: var(--brand);
+  line-height: 1;
 }
 
 .countdown .label {
@@ -674,18 +681,18 @@ a:hover {
   color: #bbb;
   margin-top: 6px;
   text-transform: uppercase;
-  letter-spacing: .5px
+  letter-spacing: .5px;
 }
 
 .countdown-live {
   margin-top: 10px;
   font-weight: 700;
-  color: var(--accent)
+  color: var(--accent);
 }
 
 @media (max-width:480px) {
   .countdown-grid {
-    grid-template-columns: repeat(2, minmax(80px, 1fr))
+    grid-template-columns: repeat(2, minmax(80px, 1fr));
   }
 }
 
@@ -695,32 +702,32 @@ a:hover {
 .agenda-container {
   max-width: 1100px;
   width: min(1100px, 100%);
-  margin: 0 auto
+  margin: 0 auto;
 }
 
 .secao {
-  margin-top: 32px
+  margin-top: 32px;
 }
 
 .lista-shows .agenda-item {
-  width: 100%
+  width: 100%;
 }
 
 .agenda-item {
   background: var(--card);
   border: 1px solid var(--stroke);
   border-radius: 10px;
-  padding: 14px
+  padding: 14px;
 }
 
 @media (max-width:699px) {
   .agenda-conteudo {
-    display: block
+    display: block;
   }
 
   .foto-local img {
     width: 100%;
-    height: auto
+    height: auto;
   }
 }
 
@@ -728,7 +735,7 @@ a:hover {
   .agenda-item {
     display: flex;
     align-items: center;
-    gap: 18px
+    gap: 18px;
   }
 
   .agenda-conteudo {
@@ -736,11 +743,11 @@ a:hover {
     align-items: center;
     gap: 18px;
     flex: 1 1 auto;
-    min-width: 0
+    min-width: 0;
   }
 
   .foto-local {
-    flex: 0 0 150px
+    flex: 0 0 150px;
   }
 
   .foto-local img {
@@ -748,21 +755,21 @@ a:hover {
     height: 150px;
     object-fit: cover;
     border-radius: 8px;
-    display: block
+    display: block;
   }
 
   .info-local {
     flex: 1 1 auto;
-    min-width: 0
+    min-width: 0;
   }
 
   .info-local h4 {
     margin: 0 0 6px 0;
-    font-size: 1.05rem
+    font-size: 1.05rem;
   }
 
   .info-local p {
-    margin: 4px 0
+    margin: 4px 0;
   }
 }
 
@@ -777,32 +784,32 @@ a:hover {
   border-radius: 12px;
   box-shadow: var(--shadow);
   text-align: center;
-  color: #fff
+  color: #fff;
 }
 
 .contato-container h2 {
   font-size: 26px;
   margin-bottom: 20px;
-  color: var(--brand)
+  color: var(--brand);
 }
 
 .contato-info {
   display: grid;
   gap: 14px;
-  font-size: 18px
+  font-size: 18px;
 }
 
 .contato-info a {
-  color: var(--accent)
+  color: var(--accent);
 }
 
 .contato-info a:hover {
-  color: var(--brand)
+  color: var(--brand);
 }
 
 .contato-info i {
   margin-right: 8px;
-  color: var(--brand)
+  color: var(--brand);
 }
 
 /* =========================================
@@ -811,19 +818,19 @@ a:hover {
 .formulario-contratar {
   display: grid;
   gap: 16px;
-  text-align: left
+  text-align: left;
 }
 
 .formulario-contratar label {
   display: flex;
   flex-direction: column;
-  gap: 6px
+  gap: 6px;
 }
 
 .formulario-contratar label span {
   font-weight: 700;
   color: #ddd;
-  font-size: .95rem
+  font-size: .95rem;
 }
 
 .formulario-contratar input,
@@ -838,39 +845,39 @@ a:hover {
 }
 
 .formulario-contratar textarea {
-  resize: vertical
+  resize: vertical;
 }
 
 .formulario-contratar input::placeholder,
 .formulario-contratar textarea::placeholder {
-  color: #777
+  color: #777;
 }
 
 .grid-2 {
   display: grid;
-  gap: 16px
+  gap: 16px;
 }
 
 .grid-3 {
   display: grid;
-  gap: 16px
+  gap: 16px;
 }
 
 .termos {
   display: flex;
   align-items: flex-start;
-  gap: 10px
+  gap: 10px;
 }
 
 .termos input {
-  transform: translateY(2px)
+  transform: translateY(2px);
 }
 
 .acoes {
   display: flex;
   flex-wrap: wrap;
   gap: 10px;
-  margin-top: 6px
+  margin-top: 6px;
 }
 
 .btn-primary,
@@ -883,44 +890,45 @@ a:hover {
   text-decoration: none;
   font-weight: 700;
   border: 1px solid transparent;
-  cursor: pointer
+  cursor: pointer;
 }
 
 .btn-primary {
   background: var(--brand);
-  color: #fff
+  color: #fff;
 }
 
 .btn-primary:hover {
   transform: translateY(-1px);
-  opacity: .95
+  opacity: .95;
 }
 
 .btn-sec {
   background: #0b0b0b;
-  border-color: #2a2a2a
+  border-color: #2a2a2a;
 }
 
 .btn-sec:hover {
-  border-color: #444
+  border-color: #444;
 }
 
 input:invalid,
 select:invalid,
 textarea:invalid {
-  border-color: #3a3a3a
+  border-color: #3a3a3a;
 }
 
 input:focus,
 select:focus,
 textarea:focus {
   border-color: var(--brand);
-  box-shadow: 0 0 0 3px rgba(139, 92, 246, .2)
+  box-shadow: 0 0 0 3px rgba(139, 92, 246, .2);
 }
 
+/* autofill */
 input:-webkit-autofill {
   -webkit-box-shadow: 0 0 0px 1000px #0b0b0b inset;
-  -webkit-text-fill-color: #fff
+  -webkit-text-fill-color: #fff;
 }
 
 /* =========================================
@@ -931,12 +939,12 @@ input:-webkit-autofill {
   color: #fff;
   padding: 18px 16px;
   text-align: center;
-  font-size: 14px
+  font-size: 14px;
 }
 
 .rodape-conteudo {
   display: grid;
-  gap: 6px
+  gap: 6px;
 }
 
 /* =========================================
@@ -945,36 +953,36 @@ input:-webkit-autofill {
 @media (min-width:600px) {
   .logo img {
     width: 60px;
-    height: 60px
+    height: 60px;
   }
 
   .nome-banda h1 {
-    font-size: 22px
+    font-size: 22px;
   }
 
   .logo-central {
     width: 130px;
-    height: 130px
+    height: 130px;
   }
 
   .sobre {
     gap: 24px;
-    padding: 40px 24px 56px
+    padding: 40px 24px 56px;
   }
 
   .grid-2 {
-    grid-template-columns: repeat(2, 1fr)
+    grid-template-columns: repeat(2, 1fr);
   }
 }
 
 @media (min-width:768px) {
   .cabecalho {
     padding: 12px 28px;
-    gap: 16px
+    gap: 16px;
   }
 
   .menu-mobile {
-    display: none
+    display: none;
   }
 
   .menu {
@@ -984,25 +992,25 @@ input:-webkit-autofill {
     background: transparent;
     padding: 0;
     box-shadow: none;
-    gap: 28px
+    gap: 28px;
   }
 
   .menu a {
-    padding: 0
+    padding: 0;
   }
 
   .botao-show {
     display: flex;
     justify-content: flex-end;
-    flex: 0 0 auto
+    flex: 0 0 auto;
   }
 
   .botao-show button {
-    padding: 10px 18px
+    padding: 10px 18px;
   }
 
   .home {
-    min-height: calc(100vh - 72px)
+    min-height: calc(100vh - 72px);
   }
 
   .logo-central {
@@ -1011,23 +1019,24 @@ input:-webkit-autofill {
     bottom: 40px;
     margin: 0;
     width: 170px;
-    height: 170px
+    height: 170px;
   }
 
   .sobre {
     grid-template-columns: 1.1fr .9fr;
-    align-items: start
+    align-items: start;
   }
 
   .destaques-home {
-    grid-template-columns: repeat(2, minmax(280px, 1fr))
+    grid-template-columns: repeat(2, minmax(280px, 1fr));
   }
 
   .grid-3 {
-    grid-template-columns: 2fr 1fr 1fr
+    grid-template-columns: 2fr 1fr 1fr;
   }
 }
 
+/* desktop grande */
 @media (min-width:1024px) {
   .cabecalho {
     padding: 14px 40px;
@@ -1038,72 +1047,72 @@ input:-webkit-autofill {
   }
 
   .nome-banda h1 {
-    font-size: 24px
+    font-size: 24px;
   }
 
   .home {
-    min-height: calc(100vh - 80px)
+    min-height: calc(100vh - 80px);
   }
 
   .logo {
-    justify-self: start
+    justify-self: start;
   }
 
   .menu {
-    justify-content: center
+    justify-content: center;
   }
 
   .botao-show {
-    justify-self: end
+    justify-self: end;
   }
 
   .sobre {
     padding: 60px 40px 80px;
-    gap: 40px
+    gap: 40px;
   }
 
   .conteudo-texto h1 {
-    font-size: 34px
+    font-size: 34px;
   }
 
-  /* centralizar fotos do "sobre" em desktop grande */
+  /* centralizar fotos do "Sobre" em desktop grande */
   .conteudo-fotos {
     display: flex;
     justify-content: center;
     align-items: center;
-    min-height: 300px
+    min-height: 300px;
   }
 
   .conteudo-fotos img:nth-child(1) {
     top: 0;
-    left: 15%
+    left: 15%;
   }
 
   .conteudo-fotos img:nth-child(2) {
     top: 0;
-    left: 50%
+    left: 50%;
   }
 
   .conteudo-fotos img:nth-child(3) {
     top: 130px;
-    left: 32%
+    left: 32%;
   }
 
   .destaques-home {
     padding: 40px;
-    gap: 32px
+    gap: 32px;
   }
 
   .lista-musicas {
-    gap: 16px
+    gap: 16px;
   }
 
   .musica-item {
-    grid-template-columns: 72px 1fr auto
+    grid-template-columns: 72px 1fr auto;
   }
 }
 
-/* ===== Mobile override específico para as fotos do "Sobre" ===== */
+/* ===== Mobile override para fotos do "Sobre" ===== */
 @media (max-width:767px) {
   .conteudo-fotos {
     position: relative;
@@ -1138,9 +1147,36 @@ input:-webkit-autofill {
    Utilitários
 ========================================= */
 .hidden {
-  display: none !important
+  display: none !important;
 }
 
 .center {
-  text-align: center
+  text-align: center;
+}
+
+@media (min-width:768px){
+  .musica-destaque{
+    display: flex !important;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+  }
+  .musica-destaque .badge{
+    align-self: center;
+    margin-bottom: 10px;
+  }
+  .musica-destaque .cover{
+    margin: 0 auto 12px;
+  }
+  .musica-destaque h3,
+  .musica-destaque .meta,
+  .musica-destaque .countdown,
+  .musica-destaque .countdown-live{
+    /* Garante centralização visual */
+    text-align: center;
+  }
+  .musica-destaque .countdown{
+    width: 100%;
+    max-width: 860px;
+  }
 }
