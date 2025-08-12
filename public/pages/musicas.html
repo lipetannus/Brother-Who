@@ -5,7 +5,7 @@
   <title>Músicas - Brother Who</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-  <!-- Fonts e Ícones -->
+  <!-- Fonts & Icons -->
   <link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet" />
   <link href="https://fonts.googleapis.com/css2?family=RocknRoll+One&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
@@ -28,7 +28,7 @@
 
     <nav class="menu" aria-label="Navegação principal">
       <a href="agenda.html"><i class="fa-solid fa-calendar-days"></i> Agenda</a>
-      <a href="musicas.html"><i class="fa-solid fa-music"></i> Músicas</a>
+      <a href="musicas.html" class="ativo"><i class="fa-solid fa-music"></i> Músicas</a>
       <a href="contato.html"><i class="fa-solid fa-user-group"></i> Contato</a>
     </nav>
 
@@ -38,23 +38,23 @@
   </header>
 
   <main>
-    <!-- Título -->
+    <!-- Header da página -->
     <section class="sobre" aria-labelledby="titulo-musicas">
-      <div class="conteudo-texto">
+      <div class="conteudo-texto page-header">
         <h1 id="titulo-musicas">Músicas</h1>
         <p>Ouça os lançamentos e as faixas já disponíveis no Spotify.</p>
       </div>
     </section>
 
-    <!-- Próximo Lançamento (Destaque + Contador) -->
-    <section aria-labelledby="titulo-destaque">
-      <h2 id="titulo-destaque" class="titulo-album" style="text-align:center; margin-bottom: 10px;">Próximo Lançamento</h2>
+    <!-- Próximo Lançamento -->
+    <section class="section" aria-labelledby="titulo-destaque">
+      <h2 id="titulo-destaque" class="section-title">Próximo Lançamento</h2>
       <div id="musica-destaque" class="musica-destaque"><!-- preenchido via JS --></div>
     </section>
 
     <!-- Lista de Músicas -->
-    <section class="lista-musicas" aria-labelledby="titulo-lista">
-      <h2 id="titulo-lista" style="color: white; text-align:center; margin-bottom: 20px;">Lista de Músicas</h2>
+    <section class="lista-musicas section" aria-labelledby="titulo-lista">
+      <h2 id="titulo-lista" class="section-title">Lista de Músicas</h2>
       <div id="lista-musicas"></div>
     </section>
   </main>
@@ -91,38 +91,33 @@
     })();
   </script>
 
-  <!-- JS: carregar planilha + destaque com contagem regressiva -->
+  <!-- JS: planilha + destaque com contagem regressiva -->
   <script>
-    // URL da Página2 (músicas) — mantenha conforme seu Google Sheet/opensheet
     const SHEET_URL = "https://opensheet.elk.sh/1SeaT_oYgJwLiR7Q-zQuBcJ75Q5QtZhhMgf37qwIbmrk/Página2";
 
-    // Utilitário: normaliza string
     const norm = (v) => (v || "").toString().trim();
+    const cover = (m) => norm(m["Local Foto Capa"] || m["Foto Capa"] || m["Capa"] || m["Imagem"]);
 
-    // Converte "dd/mm/aaaa" (ou "aaaa-mm-dd") + "HH:MM" para Date local
+    // dd/mm/aaaa (ou aaaa-mm-dd) + HH:MM -> Date local
     function parseBRDateTime(dateStr, timeStr) {
       const dStr = norm(dateStr);
       const tStr = norm(timeStr || "00:00");
-
-      let d, m, y, H = 0, Min = 0;
+      let H = 0, Min = 0;
       const tMatch = tStr.match(/^(\d{1,2}):(\d{2})/);
       if (tMatch) { H = parseInt(tMatch[1],10); Min = parseInt(tMatch[2],10); }
 
       if (/^\d{2}\/\d{2}\/\d{4}$/.test(dStr)) {
         const [dd, mm, yyyy] = dStr.split("/");
-        d = parseInt(dd,10); m = parseInt(mm,10)-1; y = parseInt(yyyy,10);
-        return new Date(y,m,d,H,Min,0,0);
+        return new Date(parseInt(yyyy,10), parseInt(mm,10)-1, parseInt(dd,10), H, Min, 0, 0);
       }
       if (/^\d{4}-\d{2}-\d{2}$/.test(dStr)) {
         const [yyyy, mm, dd] = dStr.split("-");
-        d = parseInt(dd,10); m = parseInt(mm,10)-1; y = parseInt(yyyy,10);
-        return new Date(y,m,d,H,Min,0,0);
+        return new Date(parseInt(yyyy,10), parseInt(mm,10)-1, parseInt(dd,10), H, Min, 0, 0);
       }
       const tryParse = new Date(`${dStr} ${tStr}`);
       return isNaN(tryParse) ? null : tryParse;
     }
 
-    // Formata diferença em ms para d/h/m/s
     function formatDiff(ms) {
       if (ms <= 0) return { d:0, h:0, m:0, s:0 };
       const total = Math.floor(ms/1000);
@@ -133,7 +128,6 @@
       return { d, h, m, s };
     }
 
-    // Render lista de músicas agrupadas por álbum
     function renderLista(musicas, listaEl) {
       listaEl.innerHTML = "";
       const albuns = {};
@@ -152,7 +146,7 @@
         bloco.appendChild(titulo);
 
         albuns[nomeAlbum].forEach(m => {
-          const capa = norm(m["Local Foto Capa"]);
+          const capa = cover(m);
           const nome = norm(m["Nome da Musica"]);
           const link = norm(m["Link do Spotify"]);
 
@@ -175,9 +169,8 @@
       });
     }
 
-    // Renderiza o destaque (próximo lançamento) com contagem regressiva
     function renderDestaque(m, container, onExpire) {
-      const capa = norm(m["Local Foto Capa"]);
+      const capa = cover(m);
       const nome = norm(m["Nome da Musica"]);
       const album = norm(m["Album"]);
       const dataLanc = norm(m["Data do Lançamento"]);
@@ -186,10 +179,11 @@
       const futuro = alvo && (alvo.getTime() > Date.now());
 
       container.innerHTML = `
-        <img src="${capa}" alt="Capa da música ${nome}" />
+        ${futuro ? `<div class="badge">Em breve</div>` : ``}
+        <div class="cover"><img src="${capa}" alt="Capa da música ${nome}" /></div>
         <h3>${nome}</h3>
-        ${album ? `<p><em>Álbum: ${album}</em></p>` : ``}
-        ${dataLanc ? `<p><strong>Lançamento:</strong> ${dataLanc}${horaLanc ? " às " + horaLanc : ""}</p>` : ``}
+        ${album ? `<p class="meta"><em>Álbum: ${album}</em></p>` : ``}
+        ${dataLanc ? `<p class="meta"><strong>Lançamento:</strong> ${dataLanc}${horaLanc ? " às " + horaLanc : ""}</p>` : ``}
         ${futuro ? `
           <div class="countdown" role="timer" aria-live="polite">
             <div class="countdown-grid">
@@ -232,14 +226,12 @@
       const timer = setInterval(tick, 1000);
     }
 
-    // Fluxo principal
     fetch(SHEET_URL)
       .then(res => res.json())
       .then(data => {
         const destaqueEl = document.getElementById("musica-destaque");
         const listaEl = document.getElementById("lista-musicas");
 
-        // separa por status
         const status = (m) => norm(m["Status"]).toLowerCase();
         const isLancada = (m) => status(m) === "lançada";
         const isProx = (m) => status(m) === "próximo lançamento";
@@ -247,10 +239,8 @@
         let lancadas = data.filter(isLancada);
         const proximos = data.filter(isProx);
 
-        // Render lista inicial
         renderLista(lancadas, listaEl);
 
-        // Se houver múltiplos "próximo lançamento", escolha o mais próximo pela data/hora
         if (proximos.length) {
           const withDate = proximos
             .map(m => ({ m, date: parseBRDateTime(m["Data do Lançamento"], m["Hora do Lançamento"]) }))
@@ -259,7 +249,6 @@
             ? withDate.sort((a,b) => a.date - b.date)[0].m
             : proximos[0];
 
-          // Quando lançar, move pra lista e limpa destaque
           const onExpire = () => {
             proximo["Status"] = "lançada";
             lancadas.push(proximo);
