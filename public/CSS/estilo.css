@@ -430,7 +430,7 @@ a:hover {
   border-radius: 999px;
 }
 
-/* Destaque com capa em “quadro” + badge + grid desktop */
+/* Destaque com capa em “quadro” + badge */
 .musica-destaque {
   background: var(--card);
   border: 1px solid var(--stroke);
@@ -500,22 +500,47 @@ a:hover {
   font-size: 30px
 }
 
+/* ---- Destaque: layout desktop corrigido (grid travado) ---- */
 @media (min-width:768px) {
   .musica-destaque {
     display: grid;
     grid-template-columns: 260px 1fr;
+    /* capa | infos */
     column-gap: 24px;
-    align-items: center;
+    row-gap: 10px;
+    align-items: start;
     text-align: left;
   }
 
   .musica-destaque .badge {
     grid-column: 1 / -1;
     justify-self: start;
+    margin-bottom: 6px;
   }
 
   .musica-destaque .cover {
+    grid-column: 1;
     margin: 0;
+  }
+
+  .musica-destaque h3,
+  .musica-destaque .meta,
+  .musica-destaque .countdown,
+  .musica-destaque .countdown-live {
+    grid-column: 2;
+    /* força tudo pra 2ª coluna */
+  }
+
+  .musica-destaque h3 {
+    margin: 0 0 4px;
+  }
+
+  .musica-destaque .meta {
+    margin: 0 0 6px;
+  }
+
+  .musica-destaque .countdown {
+    margin-top: 8px;
   }
 }
 
@@ -640,7 +665,7 @@ a:hover {
 .countdown .num {
   font-family: 'RocknRoll One', sans-serif;
   font-size: 28px;
-  color: var(--brand);
+  color: #8B5CF6;
   line-height: 1
 }
 
